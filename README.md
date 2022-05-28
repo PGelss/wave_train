@@ -5,7 +5,7 @@ quantum systems with nearest-neighbor (NN) interactions only.
 (with or without periodic boundary conditions).
 This Python package is centered around tensor train (TT, or matrix product) representations of 
 quantum-mechanical Hamiltonian operators and (stationary or time-evolving) state vectors.
-**wave_train** builds on the Python tensor train toolbox [scikit\_tt](https://github.com/PGelss/), 
+**wave_train** builds on the Python tensor train toolbox [scikit\_tt](https://github.com/PGelss/scikit_tt), 
 which provides efficient construction methods, storage schemes, 
 as well as solvers for eigenvalue problems and linear differential equations in the TT format.
 
