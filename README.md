@@ -1,5 +1,7 @@
 # wave_train
 
+## Short description
+
 **wave_train** is an open-source software for numerical simulations of chain-like 
 quantum systems with nearest-neighbor (NN) interactions only.
 (with or without periodic boundary conditions).
@@ -18,3 +20,7 @@ As a complement to the Python classes for full quantum mechanics, **wave_train**
 fully classical and mixed quantum-classical (Ehrenfest or mean field) dynamics of bipartite systems.
 The graphical capabilities allow visualization of quantum dynamics ‘on the fly’, with a choice of 
 several different graphical representations based on reduced density matrices.
+
+## Installation
+
+to be written ...
