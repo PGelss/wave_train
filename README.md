@@ -31,10 +31,20 @@ several different graphical representations based on reduced density matrices.
 
 ## Installation
 
-to be written ...
+A [*setup.py*](setup.py) is included in the package. To install **WaveTrain** simply enter:
+
+```
+python setup.py install --user
+```
+
+or install the latest version directly from GitHub:
+
+```
+pip install git+https://github.com/PGelss/wave_train
+```
+
 
 ## References
 
-[^1] Solving the Time-Independent Schrödinger Equation for Chains of Coupled Excitons and Phonons using Tensor Trains
-P. Gelß, R. Klein, S. Matera, B. Schmidt
-[J. Chem. Phys. 156 (2), 024109 (2022)](https://doi.org/10.1063/5.0074948) 
+[^1]: P. Gelß, R. Klein, S. Matera, B. Schmidt, "Solving the Time-Independent Schrödinger Equation for 
+Chains of Coupled Excitons and Phonons using Tensor Trains", [J. Chem. Phys. 156 (2), 024109 (2022)](https://doi.org/10.1063/5.0074948) 
