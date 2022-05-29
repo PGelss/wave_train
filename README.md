@@ -43,6 +43,9 @@ or install the latest version directly from GitHub:
 pip install git+https://github.com/PGelss/wave_train
 ```
 
+## Applications
+
+see our work on coupled excitons and phonons [^1]
 
 ## References
 
