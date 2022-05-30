@@ -20,7 +20,7 @@ employing efficient decompositions to construct low-rank representations.
 Often, the tensor-train ranks of state vectors are found to depend only marginally on the chain length *N*, 
 which results in the computational effort growing only slightly more than linearly in *N*, 
 thus mitigating the curse of dimensionality.
-Hence, **WaveTrain** complements the existing [WavePacket project](https://sourceforge.net/projects/wavepacket/)
+Thus, **WaveTrain** complements the existing [WavePacket project at SourceForge](https://sourceforge.net/projects/wavepacket/)
 which does not offer these advantages but which can be used for general Hamiltonians,
 i.e., without restriction to chain-like systems.
 
