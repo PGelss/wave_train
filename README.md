@@ -47,7 +47,5 @@ pip install git+https://github.com/PGelss/wave_train
 
 see our work on coupled excitons and phonons [^1]
 
-## References
-
 [^1]: P. Gelß, R. Klein, S. Matera, B. Schmidt, "Solving the Time-Independent Schrödinger Equation for 
 Chains of Coupled Excitons and Phonons using Tensor Trains", [J. Chem. Phys. 156 (2), 024109 (2022)](https://doi.org/10.1063/5.0074948) 
