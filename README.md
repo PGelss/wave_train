@@ -7,7 +7,7 @@ Freie Universität Berlin, Germany
 ## Short description
 
 **WaveTrain** is an open-source software for numerical simulations of chain-like 
-quantum systems with nearest-neighbor (NN) interactions only.
+quantum systems with nearest-neighbor (NN) interactions only
 (with or without periodic boundary conditions).
 This Python package is centered around tensor train (TT, or matrix product) representations of 
 quantum-mechanical Hamiltonian operators and (stationary or time-evolving) state vectors.
@@ -16,10 +16,10 @@ which provides efficient construction methods, storage schemes,
 as well as solvers for eigenvalue problems and linear differential equations in the TT format.
 
 **WaveTrain** comprises solvers for time-independent and time-dependent Schrödinger equations 
-employing efficient decompositions to construct low-rank representations. 
-Often, the tensor-train ranks of state vectors are found to depend only marginally on the chain length *N*, 
+employing TT decompositions to construct low-rank representations. 
+Often, the TT ranks of state vectors are found to depend only marginally on the chain length *N*, 
 which results in the computational effort growing only slightly more than linearly in *N*, 
-thus mitigating the curse of dimensionality.
+thus mitigating the *curse of dimensionality*.
 Thus, **WaveTrain** complements the existing [WavePacket project at SourceForge](https://sourceforge.net/projects/wavepacket/)
 which does not offer these advantages but which can be used for general Hamiltonians,
 i.e., without restriction to chain-like systems.
