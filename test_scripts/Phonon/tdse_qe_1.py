@@ -19,12 +19,6 @@ def phonon_qe_1(batch_mode):
         omg=1e-3 * 2**(1/2)              # nearest neighbours
     )
 
-    # Set up TT representation of the Hamiltonian
-    hamilton.get_TT(
-        n_basis=8,                       # size of HO basis set
-        qtt=False,                       # using quantized TT format
-    )
-
     # Set up CEoM solver
     dynamics = CEoM(
         hamilton=hamilton,               # choice of Hamiltonian, see above
