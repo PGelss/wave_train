@@ -25,8 +25,9 @@ which does not offer these advantages but which can be used for general Hamilton
 i.e., without restriction to chain-like systems.
 
 As a complement to the Python classes for full quantum mechanics, **WaveTrain** also contains classes for 
-fully classical and mixed quantum-classical (Ehrenfest or mean field) dynamics of bipartite systems.
-The graphical capabilities allow visualization of quantum dynamics ‘on the fly’, with a choice of 
+fully classical and mixed quantum-classical (Ehrenfest or mean field) dynamics of bipartite 
+("slow-fast" and/or "heavy-light") systems.
+Moreover, the graphical capabilities allow visualization of quantum dynamics ‘on the fly’, with a choice of 
 several different graphical representations based on reduced density matrices.
 
 ## Installation
