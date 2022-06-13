@@ -1,7 +1,6 @@
-# ED stands for ExciDyn (package for exciton dynamics)
 # To install a development version run: pip install -e .
 # in the root directory
-# Import command : import ED.foo
+# Import command : import wave_train.foo
 from setuptools import setup
 
 if __name__ == "__main__":
