@@ -32,13 +32,13 @@ several different graphical representations based on reduced density matrices.
 
 ## Installation
 
-A [*setup.py*](setup.py) is included in the package. To install **WaveTrain** simply enter:
+Download the latest version of **WaveTrain** by using the 'git clone' command to your local computer.  Note that a [*setup.py*](setup.py) file and a [*setup.cfg*](setup.cfg) file are included in the package. To install the package simply enter:
 
 ```
 python setup.py install --user
 ```
 
-or install the latest version directly from GitHub:
+Alternatively, you may install the latest version directly from GitHub:
 
 ```
 pip install git+https://github.com/PGelss/wave_train
