@@ -40,12 +40,18 @@ To install the package simply enter:
 python setup.py install --user
 ```
 
-which allows to download or upload recent changes by 'git pull' or 'git push', respectively.
+which allows to download or upload recent changes later by 'git pull' or 'git push', respectively.
 
 Alternatively, you may install the latest version directly from GitHub:
 
 ```
 pip install git+https://github.com/PGelss/wave_train
+```
+
+In that case, later changes can be downloaded by the command 
+
+```
+pip install --upgrade git+https://github.com/PGelss/scikit_tt
 ```
 
 ## Applications
