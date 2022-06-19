@@ -1,0 +1,8 @@
+# Remove build files
+__pycache__/
+wave_train.egg-info/
+
+# Omit output generated from graphics package 
+*.mp4
+*.pic
+*.png

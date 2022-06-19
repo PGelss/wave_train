@@ -253,9 +253,16 @@ def configure_quant_numbers_basic(figure, dynamics, outer_grid=None, style=figur
     """
 
     axes_number = figure.add_subplot(outer_grid[:, 0])  # left half of figure
-
     axes_number = adjust_axis_quantum_numbers(axes_number, dynamics.hamilton.n_site)
+
+    has_bessel = hasattr(dynamics, 'bessel')
+
     axes_number.bar(np.arange(dynamics.hamilton.n_site), np.zeros(dynamics.hamilton.n_site), width=0.4)
+
+    if has_bessel:
+        axes_number.bar(0.1 + np.arange(dynamics.hamilton.n_site), np.zeros(dynamics.hamilton.n_site), 
+            width=0.4, alpha=0.4, color="b")
+
     apply_styles([axes_number], style)
     return figure
 
@@ -667,8 +674,19 @@ def update_quant_numbers_basic(i, figure, dynamics, writer, saving):
     # get the axes for plotting the quantum numbers, by definition first axis
     axes_number = figure.axes[0]
 
-    for j, rectangle in enumerate(axes_number.patches):
+    has_bessel = hasattr(dynamics, 'bessel')
+
+    if has_bessel:
+        last = len(axes_number.patches) // 2
+
+        for j, rectangle in enumerate(axes_number.patches[last:]):
+            rectangle.set_height(dynamics.bessel[i][j])
+    else:
+        last = len(axes_number.patches)
+
+    for j, rectangle in enumerate(axes_number.patches[:last]):
         rectangle.set_height(dynamics.qu_numbr[i, j])
+
 
     figure.suptitle(dynamics.head[i])
 
