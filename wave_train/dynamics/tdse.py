@@ -135,19 +135,19 @@ How to compare with reference    : {}
         print("Initial displacements : " + str(displace))
         print(" ")
 
-        # Set alpha to coherent state parameter on every site
-        alphas = 0.5 / self.hamilton.pos_conv * displace
+        # Set zeta to coherent state parameter on every site
+        zetas = 0.5 / self.hamilton.pos_conv * displace
 
         cores = [None] * self.hamilton.n_site
 
         # Loop over cores, i.e. over sites
         print("Eigenvalues of the annihilation operator and corresponding coefficients: ")
         print(" ")
-        for j, alpha in enumerate(alphas):
-            # construct state based on alpha
-            prefct = np.exp(-0.5 * alpha ** 2)
-            coeffs = prefct * np.array([alpha ** n / np.sqrt(math.factorial(n)) for n in range(self.hamilton.n_dim)])
-            print(str(alpha) + " : " + str(coeffs))
+        for j, zeta in enumerate(zetas):
+            # construct state based on zeta
+            prefct = np.exp(-0.5 * zeta ** 2)
+            coeffs = prefct * np.array([zeta ** n / np.sqrt(math.factorial(n)) for n in range(self.hamilton.n_dim)])
+            print("zeta=" + str(zeta) + " : " + str(coeffs))
 
             # construct tensor cores
             cores[j] = np.zeros((1, self.hamilton.n_dim, 1, 1))
