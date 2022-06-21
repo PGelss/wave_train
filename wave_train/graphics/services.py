@@ -176,8 +176,8 @@ def adjust_axis_norm(axes_norm, num_steps):
     axes_norm.set_xlabel("n")
     axes_norm.xaxis.set_major_locator(MaxNLocator(integer=True))
     axes_norm.set_ylabel("<$\psi_n$|$\psi_n$>$^{1/2}$")
-    axes_norm.set_ylim(0.9, 1.1)
-    axes_norm.set_yticks(np.linspace(0.9, 1.1, 5))
+    axes_norm.set_ylim(0.998, 1.002)
+    axes_norm.set_yticks(np.linspace(0.998, 1.002, 5))
     axes_norm.yaxis.tick_right()
     axes_norm.yaxis.set_label_position("right")
 
@@ -198,8 +198,8 @@ def adjust_axis_norm_dynamics(axes_norm, max_time):
     """
     logic_check_axis_limits(axes_norm, 'x', 0, max_time)
     axes_norm.set_ylabel("<$\psi(t)$|$\psi(t)$>$^{1/2}$")
-    axes_norm.set_ylim(0.9, 1.1)
-    axes_norm.set_yticks(np.linspace(0.9, 1.1, 5))
+    axes_norm.set_ylim(0.998, 1.002)
+    axes_norm.set_yticks(np.linspace(0.998, 1.002, 5))
     axes_norm.yaxis.tick_right()
     axes_norm.yaxis.set_label_position("right")
 
