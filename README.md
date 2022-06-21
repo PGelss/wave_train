@@ -32,16 +32,26 @@ several different graphical representations based on reduced density matrices.
 
 ## Installation
 
-A [*setup.py*](setup.py) is included in the package. To install **WaveTrain** simply enter:
+Download the latest version of **WaveTrain** to your local computer by using the 'git clone' command.  
+Note that a [*setup.py*](setup.py) file and a [*setup.cfg*](setup.cfg) file are included in the package. 
+To install the package simply enter:
 
 ```
 python setup.py install --user
 ```
 
-or install the latest version directly from GitHub:
+which allows to download or upload recent changes later by 'git pull' or 'git push', respectively.
+
+Alternatively, you may install the latest version directly from GitHub:
 
 ```
 pip install git+https://github.com/PGelss/wave_train
+```
+
+In that case, later changes can be downloaded by the command 
+
+```
+pip install --upgrade git+https://github.com/PGelss/scikit_tt
 ```
 
 ## Applications
