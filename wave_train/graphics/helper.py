@@ -4,7 +4,6 @@ import numpy as np
 from typing import List
 from matplotlib import gridspec
 
-
 def movie(func):
     """
     Decorator function for saving a snapshot of the figure object

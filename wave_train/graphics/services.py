@@ -146,12 +146,14 @@ def adjust_axis_energy(axes_energy, num_steps, e_min, e_max):
 
 def adjust_axis_energy_dynamics(axes_energy, max_time, e_min, e_max, quant=True):
     logic_check_axis_limits(axes_energy, 'x', 0, max_time)
+
     axes_energy.set_xlabel("t")
 
     if quant:
         axes_energy.set_ylabel("<$\psi$(t)|H|$\psi$(t)>")
     else:
         axes_energy.set_ylabel("Energies")
+
     axes_energy.set_ylim(e_min, e_max)
     axes_energy.set_yticks(np.linspace(e_min, e_max, 5))
     axes_energy.yaxis.tick_right()
@@ -840,6 +842,17 @@ def update_positions2_expect_tise(i, figure, dynamics, writer, saving):
 ############################################################
 def update_expectation_values_tdse(i, figure, dynamics):
     axes_energy, axes_norm, axes_autoc = figure.axes[-3], figure.axes[-2], figure.axes[-1]
+
+    if i == 0:
+        init = dynamics.nrgy[0]
+
+        if init > 0:
+            ticks = np.linspace(0.99 * init, 1.01 * init, 5, endpoint=True)
+        else:
+            ticks = np.linspace(1.01 * init, 0.99 * init, 5, endpoint=True)
+
+        axes_energy.set_ylim(ticks[0], ticks[-1])
+        axes_energy.set_yticks(ticks)
 
     time = dynamics.time[:i+1]
     # update energy expectation values
