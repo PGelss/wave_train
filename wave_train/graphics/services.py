@@ -847,9 +847,9 @@ def update_expectation_values_tdse(i, figure, dynamics):
         init = dynamics.nrgy[0]
 
         if init > 0:
-            ticks = np.linspace(0.99 * init, 1.01 * init, 5, endpoint=True)
+            ticks = np.linspace(0.998 * init, 1.002 * init, 5, endpoint=True)
         else:
-            ticks = np.linspace(1.01 * init, 0.99 * init, 5, endpoint=True)
+            ticks = np.linspace(1.002 * init, 0.998 * init, 5, endpoint=True)
 
         axes_energy.set_ylim(ticks[0], ticks[-1])
         axes_energy.set_yticks(ticks)
