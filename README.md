@@ -32,7 +32,8 @@ several different graphical representations based on reduced density matrices.
 
 ## Installation
 
-Download the latest version of **WaveTrain** to your local computer by using the 'git clone' command.  
+After downloading and installing the Python tensor train toolbox [scikit\_tt](https://github.com/PGelss/scikit_tt),
+you can download the latest version of **WaveTrain** to your local computer by using the 'git clone' command.  
 Note that a [*setup.py*](setup.py) file and a [*setup.cfg*](setup.cfg) file are included in the package. 
 To install the package simply enter:
 
@@ -42,7 +43,7 @@ cd wave_train
 python setup.py install --user
 ```
 
-which allows to download or upload recent changes later by 'git pull' or 'git push', respectively.
+which subsequently allows to download or upload recent changes later by 'git pull' or 'git push', respectively.
 
 Alternatively, you may install the latest version directly from GitHub:
 
@@ -53,7 +54,7 @@ in which case there is no direct git access.
 Later changes can be downloaded by the command 
 
 ```
-pip install --upgrade git+https://github.com/PGelss/scikit_tt
+pip install --upgrade git+https://github.com/PGelss/wave_train
 ```
 
 ## Applications
