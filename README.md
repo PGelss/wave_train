@@ -37,6 +37,8 @@ Note that a [*setup.py*](setup.py) file and a [*setup.cfg*](setup.cfg) file are 
 To install the package simply enter:
 
 ```
+git clone https://github.com/PGelss/wave_train.git 
+cd wave_train
 python setup.py install --user
 ```
 
@@ -47,8 +49,8 @@ Alternatively, you may install the latest version directly from GitHub:
 ```
 pip install git+https://github.com/PGelss/wave_train
 ```
-
-In that case, later changes can be downloaded by the command 
+in which case there is no direct git access.
+Later changes can be downloaded by the command 
 
 ```
 pip install --upgrade git+https://github.com/PGelss/scikit_tt
