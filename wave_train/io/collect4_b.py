@@ -453,8 +453,8 @@ Substeps        : {}
         self.colors = plt.rcParams['axes.prop_cycle'].by_key()['color']
 
         # Open figure and set its size
-        plt.figure('plot_3', figsize=(3.5, 3.5))  # Width, height in inches.
-        plt.axes([0.25,0.20,0.70,0.75])           # left, bottom, width, height in normalized (0, 1) units 
+        plt.figure('plot_3', figsize=(2.5, 2.5))  # Width, height in inches.
+        plt.axes([0.30,0.20,0.65,0.75])           # left, bottom, width, height in normalized (0, 1) units
 
         print(' ')
         print('****************')
