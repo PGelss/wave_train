@@ -32,7 +32,7 @@ def exciton_tise(batch_mode):
         hamilton=hamilton,               # choice of Hamiltonian, see above
         n_levels=16,                     # number of energy levels to be calculated
         solver='als',                    # choice of eigensolver for the full system
-        eigen='eigs',                    # choice of eigensolver for the micro systems
+        eigen='eig',                     # choice of eigensolver for the micro systems
         ranks=15,                        # rank of initial guess for ALS
         repeats=20,                      # number of sweeps in eigensolver scheme
         conv_eps=1e-8,                   # threshold for detecting convergence of the eigenvalue
