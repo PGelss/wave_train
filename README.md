@@ -4,6 +4,8 @@ by *Jerome Riedel, Patrick Gelß, and Burkhard Schmidt*
 
 Freie Universität Berlin, Germany
 
+<img src="design_logo/wavetrain.jpg" width="600" height="300">
+
 ## Short description
 
 **WaveTrain** is an open-source software for numerical simulations of chain-like 
