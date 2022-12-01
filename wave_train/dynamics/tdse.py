@@ -371,7 +371,7 @@ How to compare with reference    : {}
         self.step_sizes = self.sub_size * np.ones(self.sub_steps)
 
         if self.solver in ['s2', 's4', 's6', 's8']:
-            self.previous = None
+            self.previous = None # differencing schemes require storing a previous time step
             order = int(self.solver[1])
             self.op_hod = 2 * self.sub_size * self.operator.copy()
             op_tmp = self.operator.copy()
