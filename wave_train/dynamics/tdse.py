@@ -18,7 +18,7 @@ class TDSE(QuantumMechanics):
     """
 
     def __init__(self, hamilton, num_steps, step_size, sub_steps=1,
-                 solver='se', normalize=0,
+                 solver='s2', normalize=0,
                  max_rank=20, repeats=20, threshold=1e-12,
                  save_file=None, load_file=None, compare=None):
         """
@@ -31,7 +31,7 @@ class TDSE(QuantumMechanics):
         sub_steps: int
             number of sub_steps for each main step
         solver: 2-character-string (optional)
-            method of numeric integration: ie, ee, tr, se, lt, sm, yn, kl
+            method of numeric integration: ie, ee, tr, s2, s4, s6, s8, lt, sm, yn, kl
         normalize: int (optional)
             whether|how to normalize the solutions, can be 0|1|2
         max_rank: int
@@ -370,10 +370,6 @@ How to compare with reference    : {}
         # Set up a vector containing all temporal sub-steps: Needed only for ee, se, ie, tr
         self.step_sizes = self.sub_size * np.ones(self.sub_steps)
 
-        # Symmetric Euler requires storing a previous time step
-        if self.solver == 'se':
-            self.previous = None
-
         if self.solver in ['s2', 's4', 's6', 's8']:
             self.previous = None
             order = int(self.solver[1])
@@ -394,12 +390,6 @@ How to compare with reference    : {}
                 if self.solver == 'ee':  # Explicit Euler
                     psi = ode.explicit_euler(self.operator, initial_value=self.psi, step_sizes=self.step_sizes,
                                              threshold=self.threshold, max_rank=self.max_rank, normalize=self.normalize, progress=False)
-                elif self.solver == 'se':  # Symmetric Euler (fka 'second order differencing' in quantum dynamics community)
-                    psi = ode.symmetric_euler(self.operator, initial_value=self.psi,
-                                              step_sizes=self.step_sizes, previous_value=self.previous,
-                                              threshold=self.threshold, max_rank=self.max_rank,
-                                              normalize=self.normalize, progress=False)
-                    self.previous = psi[-2]
                 elif self.solver in ['s2', 's4', 's6', 's8']:  # Higher order differencing
                     psi = ode.hod(self.operator, initial_value=self.psi, step_size=self.sub_size,
                                   number_of_steps=self.sub_steps, order=int(self.solver[1]),
