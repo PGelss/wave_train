@@ -218,6 +218,35 @@ def adjust_axis_autocorrelation(axes_autoc, max_time):
 
     return axes_autoc
 
+def get_default_grid_setup(dynamics: object, expect=False) -> tuple:
+    """
+    Utility function to get the grid specification for the
+    different types of dynamics
+
+    dynamics: Instance of a Dynamics class
+        The dynamics class for which to return
+        the grid setup
+
+    Returns
+    -------
+    A tuple of two integers specifying the row and col setup
+    of a grid
+    """
+    specifications = {
+        "TISE": (2, 1),
+        "TDSE": (3, 1),
+        "QCMD": (3, 1),
+        "CEoM": (1, 1)
+    }
+
+    name = dynamics.__class__.__name__
+
+    if not expect:
+        return specifications[name]
+    else:
+        row, col = specifications[name]
+        return (row, col + 1)
+
 ############################################################
 #            CONFIGURATION FUNCTIONS TISE                  #
 ############################################################
@@ -253,6 +282,9 @@ def configure_quant_numbers_basic(figure, dynamics, outer_grid=None, style=figur
     ---------
     The updated figure instance
     """
+    if outer_grid is None:
+        row, col = get_default_grid_setup(dynamics)
+        outer_grid = gridspec.GridSpec(row, col, figure=figure)
 
     axes_number = figure.add_subplot(outer_grid[:, 0])  # left half of figure
     axes_number = adjust_axis_quantum_numbers(axes_number, dynamics.hamilton.n_site)
@@ -269,6 +301,9 @@ def configure_quant_numbers_basic(figure, dynamics, outer_grid=None, style=figur
     return figure
 
 def configure_quant_numbers2_basic(figure, dynamics, outer_grid=None, style=figure_style):
+    if outer_grid is None:
+        row, col = get_default_grid_setup(dynamics)
+        outer_grid = gridspec.GridSpec(row, col, figure=figure)
 
     axes_number = figure.add_subplot(outer_grid[:, 0])  # left half of figure
 
@@ -294,6 +329,9 @@ def configure_quant_numbers2_basic(figure, dynamics, outer_grid=None, style=figu
     return figure
 
 def configure_quant_displace2_basic(figure, dynamics, outer_grid=None, style=figure_style):
+    if outer_grid is None:
+        row, col = get_default_grid_setup(dynamics)
+        outer_grid = gridspec.GridSpec(row, col, figure=figure)
 
     axes_displace = figure.add_subplot(outer_grid[:, 0])  # left half of figure
 
@@ -322,6 +360,9 @@ def configure_quant_displace2_basic(figure, dynamics, outer_grid=None, style=fig
     return figure
 
 def configure_positions2_basic(figure, dynamics, outer_grid=None, style=figure_style):
+    if outer_grid is None:
+        row, col = get_default_grid_setup(dynamics)
+        outer_grid = gridspec.GridSpec(row, col, figure=figure)
 
     axes_positions = figure.add_subplot(outer_grid[:, 0])  # left half of figure
 
@@ -377,6 +418,9 @@ def configure_populations_basic(figure, dynamics, outer_grid=None, style=figure_
     ---------
     The updated figure
     """
+    if outer_grid is None:
+        row, col = get_default_grid_setup(dynamics)
+        outer_grid = gridspec.GridSpec(row, col, figure=figure)
 
     ax_frame = figure.add_subplot(outer_grid[:, 0])  # left half of figure
     ax_frame = configure_figure_frame(ax_frame, r"State", r"Populations")
@@ -407,7 +451,9 @@ def configure_populations_basic(figure, dynamics, outer_grid=None, style=figure_
     return figure
 
 def configure_densitymat_basic(figure, dynamics, outer_grid=None, style=figure_style):
-
+    if outer_grid is None:
+        row, col = get_default_grid_setup(dynamics)
+        outer_grid = gridspec.GridSpec(row, col, figure=figure)
 
     ax_frame = figure.add_subplot(outer_grid[:, 0])  # left half of figure
     ax_frame = configure_figure_frame(ax_frame, r"State", r"State")
@@ -426,7 +472,9 @@ def configure_densitymat_basic(figure, dynamics, outer_grid=None, style=figure_s
     return figure
 
 def configure_phasespace_basic(figure, dynamics, outer_grid=None, style=figure_style):
-
+    if outer_grid is None:
+        row, col = get_default_grid_setup(dynamics)
+        outer_grid = gridspec.GridSpec(row, col, figure=figure)
 
     ax_frame = figure.add_subplot(outer_grid[:, 0])  # left half of figure
     ax_frame = configure_figure_frame(ax_frame, r"<x>", r"<p>")
