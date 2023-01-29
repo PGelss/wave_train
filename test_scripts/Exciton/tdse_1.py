@@ -1,10 +1,11 @@
 from wave_train.hamilton.exciton import Exciton
 from wave_train.dynamics.tdse import TDSE
 from wave_train.io.logging import handle_logging
+from wave_train.io.logging import TeeLogger
 from os.path import basename, splitext
 
 @handle_logging
-def exciton_tdse(batch_mode, log_file="", split=True):
+def exciton_tdse(batch_mode, **kwargs):
     
     # Detect name of this script file (without extension)
     base_name = basename(__file__)
@@ -29,7 +30,7 @@ def exciton_tdse(batch_mode, log_file="", split=True):
     # Set up TDSE solver
     dynamics = TDSE(
         hamilton=hamilton,               # choice of Hamiltonian, see above
-        num_steps=1,                    # number of main time steps
+        num_steps=50,                    # number of main time steps
         step_size=20,                    # size of main time steps
         sub_steps=5,                     # number of sub steps
         solver='sm',                     # can be 'se' (symmetrized Euler) or 'sm' (Strang-Marchuk splitting) or ...
@@ -49,7 +50,7 @@ def exciton_tdse(batch_mode, log_file="", split=True):
 
     # Batch mode
     if batch_mode:
-        dynamics.solve(log_file="test.log")                 # Solve TDSE *without* visualization
+        dynamics.solve()                 # Solve TDSE *without* visualization
 
     # Interactive mode: Setup animated visualization
     else:
@@ -73,3 +74,7 @@ if __name__ == '__main__':
     log_file    = "test.log" 
     split       = False
     exciton_tdse(batch_mode=False, log_file=log_file, split=split)
+
+    # alternative structure for logging without wrapping in decorator
+    # logger = TeeLogger(log_file=log_file)
+    # exciton_tdse(batch_mode=False)
