@@ -33,30 +33,18 @@ Moreover, the graphical capabilities allow visualization of quantum dynamics ‘
 several different graphical representations based on reduced density matrices.
 
 ## Installation
-
 After downloading and installing the Python tensor train toolbox [scikit\_tt](https://github.com/PGelss/scikit_tt),
-you can download the latest version of **WaveTrain** to your local computer by using the 'git clone' command.  
-Note that a [*setup.py*](setup.py) file and a [*setup.cfg*](setup.cfg) file are included in the package. 
-To install the package simply enter:
-
+installation of the **WaveTrain** software package is straightforward
+```
+pip install git+https://github.com/PGelss/wave_train
+pip install wave_train 
+```
+where pip belongs to a Python installation with minimum version requirement 3.7.0.
+For a developer installation you can download the latest version of **WaveTrain** to your local computer by using the 'git clone' command.  
 ```
 git clone https://github.com/PGelss/wave_train.git 
 cd wave_train
 python setup.py install --user
-```
-
-which subsequently allows to download or upload recent changes later by 'git pull' or 'git push', respectively.
-
-Alternatively, you may install the latest version directly from GitHub:
-
-```
-pip install git+https://github.com/PGelss/wave_train
-```
-in which case there is no direct git access.
-Later changes can be downloaded by the command 
-
-```
-pip install --upgrade git+https://github.com/PGelss/wave_train
 ```
 
 ## Applications

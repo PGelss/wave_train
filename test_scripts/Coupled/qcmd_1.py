@@ -1,13 +1,18 @@
 from wave_train.hamilton.coupled import Coupled
 from wave_train.dynamics.qcmd import QCMD
+from wave_train.io.logging import TeeLogger
 from os.path import basename, splitext
 
-
 def coupled_qcmd(batch_mode):
-    
     # Detect name of this script file (without extension)
-    base_name = basename(__file__)
-    my_file = splitext(base_name)[0]
+    base_name   = basename(__file__)
+    my_file     = splitext(base_name)[0]
+
+    # logging instance: will be initialized with 
+    # class for logging to both console and logfile
+    logger = None
+    if not batch_mode:
+        logger = TeeLogger(log_file=my_file + ".log")
 
     # Set up the coupled exciton-phonon Hamiltonian for a chain
     hamilton = Coupled(
