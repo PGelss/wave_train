@@ -32,6 +32,10 @@ fully classical and mixed quantum-classical (Ehrenfest or mean field) dynamics o
 Moreover, the graphical capabilities allow visualization of quantum dynamics ‘on the fly’, with a choice of 
 several different graphical representations based on reduced density matrices.
 
+## Full description
+
+For a detailed description of the WaveTrain software, see our article that appeared 2023 at arXiv[^3] 
+
 ## Installation
 After downloading and installing the Python tensor train toolbox [scikit\_tt](https://github.com/PGelss/scikit_tt),
 installation of the **WaveTrain** software package is straightforward
@@ -49,7 +53,11 @@ python setup.py install --user
 
 ## Applications
 
-see our work on coupled excitons and phonons [^1]
+see our work on solving the TISE[^1] and TDSE[^2] for coupled excitons and phonons
 
 [^1]: P. Gelß, R. Klein, S. Matera, B. Schmidt, "Solving the Time-Independent Schrödinger Equation for 
 Chains of Coupled Excitons and Phonons using Tensor Trains", [J. Chem. Phys. 156 (2), 024109 (2022)](https://doi.org/10.1063/5.0074948) 
+
+[^2]: P. Gelß, R. Klein, S. Matera, and B. Schmidt, "Quantum Dynamics of Coupled Excitons and Phonons in Chain-Like Systems: Tensor Train Approaches and Higher-Order Propagators", [arXiv:2302.03725](https://arxiv.org/abs/2302.03725)
+
+[^3]: J. Riedel, P. Gelß, R. Klein, and B. Schmidt, "WaveTrain: A Python Package for Numerical Quantum Mechanics of Chain-Like Systems Based on Tensor Trains", [arXiv:2302.03725](https://arxiv.org/abs/2302.03725)
