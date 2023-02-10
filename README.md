@@ -40,7 +40,7 @@ For a detailed description of the WaveTrain software, see our article that appea
 After downloading and installing the Python tensor train toolbox [scikit\_tt](https://github.com/PGelss/scikit_tt),
 installation of the **WaveTrain** software package is straightforward
 ```
-pip install git+https://github.com/PGelss/wave_train
+pip install git+https://github.com/PGelss/scikit_tt
 pip install wave_train 
 ```
 where pip belongs to a Python installation with minimum version requirement 3.7.0.
