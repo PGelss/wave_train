@@ -4,7 +4,7 @@ by *Jerome Riedel, Patrick Gelß, and Burkhard Schmidt*
 
 Freie Universität Berlin, Germany
 
-<img src="https://github.com/PGelss/wave_train/blob/main/design_logo/wavetrain.jpg" width="600" height="300">
+<img src="https://github.com/PGelss/wave_train/design_logo/wavetrain.jpg" width="600" height="300">
 
 ## Short description
 
