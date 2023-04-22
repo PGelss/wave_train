@@ -379,7 +379,15 @@ How to compare with reference    : {}
                 op_tmp = op_tmp.dot(self.operator).dot(self.operator)
                 self.op_hod += 2 / np.math.factorial(2 * k - 1) * self.sub_size ** (2 * k - 1) * op_tmp
             self.op_hod = self.op_hod.ortho(threshold=self.threshold)
-
+            
+        # Increase rank of initial quantum state for TDVP
+        if self.solver in ['vp']:
+            psi_tmp = self.psi
+            for i in range(1, self.max_rank):
+                psi_tmp = psi_tmp + self.psi
+            self.psi = psi_tmp.ortho()
+            self.psi = (1/self.psi.norm())*self.psi
+        
     def update_solve(self, i):
 
         with utl.timer() as cputime:
@@ -425,6 +433,10 @@ How to compare with reference    : {}
                                                 initial_value=self.psi, step_size=self.sub_size,
                                                 number_of_steps=self.sub_steps, threshold=self.threshold,
                                                 max_rank=self.max_rank, normalize=self.normalize)
+                    
+                elif self.solver == 'vp':  # time-dependent variational principle
+                    psi = ode.tdvp(1j*self.operator, initial_value=self.psi, step_size=self.sub_size,
+                                                number_of_steps=self.sub_steps, normalize=self.normalize)
 
                 elif self.solver == 'qe':  # Quasi-exact propagation
                     self.psi = self.propagator @ self.psi
