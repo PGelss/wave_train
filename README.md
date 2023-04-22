@@ -4,7 +4,7 @@ by *Jerome Riedel, Patrick Gelß, and Burkhard Schmidt*
 
 Freie Universität Berlin, Germany
 
-<img src="design_logo/wavetrain.jpg" width="600" height="300">
+![WaveTrain-Logo](https://raw.githubusercontent.com/pgelss/wave_train/master/design_logo/wavetrain.jpg)
 
 ## Short description
 
@@ -32,36 +32,32 @@ fully classical and mixed quantum-classical (Ehrenfest or mean field) dynamics o
 Moreover, the graphical capabilities allow visualization of quantum dynamics ‘on the fly’, with a choice of 
 several different graphical representations based on reduced density matrices.
 
+## Full description
+
+For a detailed description of the WaveTrain software, see our article that appeared 2023 at arXiv[^1] 
+
 ## Installation
-
 After downloading and installing the Python tensor train toolbox [scikit\_tt](https://github.com/PGelss/scikit_tt),
-you can download the latest version of **WaveTrain** to your local computer by using the 'git clone' command.  
-Note that a [*setup.py*](setup.py) file and a [*setup.cfg*](setup.cfg) file are included in the package. 
-To install the package simply enter:
-
+installation of the **WaveTrain** software package is straightforward
+```
+pip install git+https://github.com/PGelss/scikit_tt
+pip install wave_train 
+```
+where pip belongs to a Python installation with minimum version requirement 3.7.0.
+For a developer installation you can download the latest version of **WaveTrain** to your local computer by using the 'git clone' command.  
 ```
 git clone https://github.com/PGelss/wave_train.git 
 cd wave_train
 python setup.py install --user
 ```
 
-which subsequently allows to download or upload recent changes later by 'git pull' or 'git push', respectively.
-
-Alternatively, you may install the latest version directly from GitHub:
-
-```
-pip install git+https://github.com/PGelss/wave_train
-```
-in which case there is no direct git access.
-Later changes can be downloaded by the command 
-
-```
-pip install --upgrade git+https://github.com/PGelss/wave_train
-```
-
 ## Applications
 
-see our work on coupled excitons and phonons [^1]
+see our work on solving the TISE[^2] and TDSE[^3] for coupled excitons and phonons
 
-[^1]: P. Gelß, R. Klein, S. Matera, B. Schmidt, "Solving the Time-Independent Schrödinger Equation for 
+[^1]: J. Riedel, P. Gelß, R. Klein, and B. Schmidt, "WaveTrain: A Python Package for Numerical Quantum Mechanics of Chain-Like Systems Based on Tensor Trains", [arXiv:2302.03725](https://arxiv.org/abs/2302.03725)
+
+[^2]: P. Gelß, R. Klein, S. Matera, B. Schmidt, "Solving the Time-Independent Schrödinger Equation for 
 Chains of Coupled Excitons and Phonons using Tensor Trains", [J. Chem. Phys. 156 (2), 024109 (2022)](https://doi.org/10.1063/5.0074948) 
+
+[^3]: P. Gelß, R. Klein, S. Matera, and B. Schmidt, "Quantum Dynamics of Coupled Excitons and Phonons in Chain-Like Systems: Tensor Train Approaches and Higher-Order Propagators", [arXiv:2302.03725](https://arxiv.org/abs/2302.03725)
