@@ -200,6 +200,7 @@ Setting up SLIM operators
 
 Size of excitonic basis set = {}
         """.format(self.n_dim))
+
         if self.homogen:
             print('shape of S = ', self.S.shape)
             print('shape of L = ', self.L.shape)
