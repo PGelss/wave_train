@@ -34,7 +34,7 @@ several different graphical representations based on reduced density matrices.
 
 ## Full description
 
-For a detailed description of the WaveTrain software, see our article that appeared 2023 at arXiv[^1] 
+For a detailed description of the WaveTrain software, see our article that appeared in February 2023 at arXiv[^1]. To appear in J. Chem. Phys. 
 
 ## Installation
 After downloading and installing the Python tensor train toolbox [scikit\_tt](https://github.com/PGelss/scikit_tt),
