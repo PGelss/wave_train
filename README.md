@@ -34,7 +34,7 @@ several different graphical representations based on reduced density matrices.
 
 ## Full description
 
-For a detailed description of the WaveTrain software, see our article that appeared in February 2023 at arXiv[^1]. To appear in J. Chem. Phys. 
+For a detailed description of the WaveTrain software, see our article that appeared in April 2023 in J. Chem. Phys.[^1].
 
 ## Installation
 After downloading and installing the Python tensor train toolbox [scikit\_tt](https://github.com/PGelss/scikit_tt),
@@ -55,7 +55,7 @@ python setup.py install --user
 
 see our work on solving the TISE[^2] and TDSE[^3] for coupled excitons and phonons
 
-[^1]: J. Riedel, P. Gelß, R. Klein, and B. Schmidt, "WaveTrain: A Python Package for Numerical Quantum Mechanics of Chain-Like Systems Based on Tensor Trains", [arXiv:2302.03725](https://arxiv.org/abs/2302.03725)
+[^1]: J. Riedel, P. Gelß, R. Klein, and B. Schmidt, "WaveTrain: A Python Package for Numerical Quantum Mechanics of Chain-Like Systems Based on Tensor Trains", [J. Chem. Phys. 158 (16), 164801 (2023)](https://doi.org/10.1063/5.0147314)
 
 [^2]: P. Gelß, R. Klein, S. Matera, B. Schmidt, "Solving the Time-Independent Schrödinger Equation for 
 Chains of Coupled Excitons and Phonons using Tensor Trains", [J. Chem. Phys. 156 (2), 024109 (2022)](https://doi.org/10.1063/5.0074948) 
