@@ -17,6 +17,7 @@ quantum-mechanical Hamiltonian operators and (stationary or time-evolving) state
 which provides efficient construction methods, storage schemes, 
 as well as solvers for eigenvalue problems and linear differential equations in the TT format.
 
+
 **WaveTrain** comprises solvers for time-independent and time-dependent Schrödinger equations 
 employing TT decompositions to construct low-rank representations. 
 Often, the TT ranks of state vectors are found to depend only marginally on the chain length *N*, 
