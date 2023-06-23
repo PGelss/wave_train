@@ -22,7 +22,10 @@ class Chain:
                 Homogeneous chain/ring
             really_homogen: boolean
                 Really a homogeneous chain/ring
-
+            classical: boolean
+                Whether a system has a well-defined classical limit
+            bipartite: boolean
+                Whether a system is bipartite, i.e. comprising two classes of particles.
         """
 
         if n_site < 2:
@@ -32,8 +35,9 @@ class Chain:
         self.n_site = n_site
         self.periodic = periodic
         self.homogen = homogen
-
         self.really_homogen = self.homogen
+        self.classical = []
+        self.bipartite = []
 
     def __str__(self):
 

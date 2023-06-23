@@ -76,6 +76,8 @@ class Coupled(Chain):
         
         # Construct object of parent class
         Chain.__init__(self, n_site, periodic, homogen)
+        self.classical = True
+        self.bipartite = True
 
         # Construct objects of phonon and exciton class
         self.ex = Exciton(n_site, periodic, homogen, alpha, beta, eta)

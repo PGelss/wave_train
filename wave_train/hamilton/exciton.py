@@ -35,6 +35,8 @@ class Exciton(Chain):
         
         # Initialize object of parent class
         Chain.__init__(self, n_site, periodic, homogen)
+        self.classical = False
+        self.bipartite = False
 
         # Parameters of a homogeneous chain/ring are converted from scalar to vector
         if homogen:
