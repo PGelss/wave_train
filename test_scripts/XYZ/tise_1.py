@@ -1,6 +1,6 @@
-from ...wave_train.hamilton.exciton import Exciton
-from ...wave_train.dynamics.tise import TISE
-from ...wave_train.io.logging import TeeLogger
+import wave_train.hamilton.exciton
+import wave_train.dynamics.tise
+import wave_train.io.logging
 from os.path import basename, splitext
 
 def xyz_tise(batch_mode):
@@ -12,10 +12,10 @@ def xyz_tise(batch_mode):
     # class for logging to both console and logfile
     logger = None
     if not batch_mode:
-        logger = TeeLogger(log_file=my_file + ".log")
+        logger = wave_train.io.logging.TeeLogger(log_file=my_file + ".log")
 
     # Set up the excitonic Hamiltonian for a chain
-    hamilton = Exciton(
+    hamilton = wave_train.hamilton.exciton.Exciton(
         n_site=6,                        # number of sites
         periodic=True,                   # periodic boundary conditions
         homogen=True,                    # homogeneous chain/ring
@@ -33,7 +33,7 @@ def xyz_tise(batch_mode):
     # Set up TISE solver
     # n_levels = n_site+1                  # ground and singly excited
     # n_levels = n_site*(n_site+1)//2+1    # ground and singly and doubly excited
-    dynamics = TISE(
+    dynamics = wave_train.dynamics.tise.TISE(
         hamilton=hamilton,               # choice of Hamiltonian, see above
         n_levels=16,                     # number of energy levels to be calculated
         solver='als',                    # choice of eigensolver for the full system
