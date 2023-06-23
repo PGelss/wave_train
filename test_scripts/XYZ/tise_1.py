@@ -1,4 +1,4 @@
-import wave_train.hamilton.exciton
+import wave_train.hamilton.xyz
 import wave_train.dynamics.tise
 import wave_train.io.logging
 from os.path import basename, splitext
@@ -15,7 +15,7 @@ def xyz_tise(batch_mode):
         logger = wave_train.io.logging.TeeLogger(log_file=my_file + ".log")
 
     # Set up the excitonic Hamiltonian for a chain
-    hamilton = wave_train.hamilton.exciton.Exciton(
+    hamilton = wave_train.hamilton.exciton.XYZ(
         n_site=6,                        # number of sites
         periodic=True,                   # periodic boundary conditions
         homogen=True,                    # homogeneous chain/ring
