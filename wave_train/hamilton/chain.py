@@ -25,7 +25,8 @@ class Chain:
             classical: boolean
                 Whether a system has a well-defined classical limit
             bipartite: boolean
-                Whether a system is bipartite, i.e. comprising two classes of particles.
+                Whether a system is bipartite, i.e. comprising
+                two classes of particles, e.g. fast and slow.
         """
 
         if n_site < 2:

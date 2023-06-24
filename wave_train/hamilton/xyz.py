@@ -8,7 +8,9 @@ class XYZ(Chain):
     """
     Exciton dynamics in one dimension
     ---------------------------------
-    
+
+    This is a copy of the class "exciton",
+    used here for test purposes only
     Linear chain of electronic sites with periodic boundaries
     Model consists of site energies (alpha) and nearest neighbor coupling (beta)
     
