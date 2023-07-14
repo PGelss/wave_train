@@ -14,7 +14,7 @@ class Animation:
     solve the underlying problem of the FuncAnimation class, namely that creation
     of animation output and visualization are executed in order and not in parallel.
 
-    1) If image_file is not None, last snaphot is saved, but previous snapshots are removed.
+    1) If image_file is not None, last snapshot is saved, but previous snapshots are removed.
     2) If image_file is not None and snapshot is True, all snapshots are saved. 
        If image_file == None and snapshot == True, a default snapshot name will be assigned
     3) If image_file is not None, movie_file is not None, and snapshot is True,
@@ -34,7 +34,7 @@ class Animation:
         "frames",       # frames in the animation
         "pause",        # pause between frames
         "frame_rate",   # number of frames per second
-        "frame_count"   # counter of frames/snaphots in animation
+        "frame_count"   # counter of frames/snapshots in animation
     ]
 
     movie_formats = ['mp4']
@@ -87,10 +87,10 @@ class Animation:
 
         if self.image_file is None:
             if snapshots and self.movie_file is not None:
-                self.image_file = "snaphot.png"
+                self.image_file = "snapshot.png"
                 logging.warning("Name for snapshots was not provided. Defaulting to 'snapshot.png'")
             elif self.movie_file is not None:
-                # indicate that all snaphots must be removed
+                # indicate that all snapshots must be removed
                 self.image_file = "snapshot_removable.png"
             else:
                 self.image_file = ""
