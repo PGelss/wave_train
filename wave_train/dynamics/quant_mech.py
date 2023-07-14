@@ -37,19 +37,21 @@ class QuantumMechanics(Mechanics):
         # More observables (from reduced density matrices)
         self.rho_site = np.zeros((self.num_steps + 1, self.hamilton.n_site,
                              self.hamilton.n_dim, self.hamilton.n_dim), dtype=complex)
-        self.position = np.zeros((self.num_steps + 1, self.hamilton.n_site))  # position
-        self.momentum = np.zeros((self.num_steps + 1, self.hamilton.n_site))  # momentum
-        self.pos_squa = np.zeros((self.num_steps + 1, self.hamilton.n_site))  # position squared
-        self.mom_squa = np.zeros((self.num_steps + 1, self.hamilton.n_site))  # momentum uncertainty
-        self.pos_wide = np.zeros((self.num_steps + 1, self.hamilton.n_site))  # position uncertainty
-        self.mom_wide = np.zeros((self.num_steps + 1, self.hamilton.n_site))  # momentum uncertainty
-        self.unc_prod = np.zeros((self.num_steps + 1, self.hamilton.n_site))  # uncertainty product
 
         if self.hamilton.bipartite:
             self.q1_numbr = np.zeros((self.num_steps + 1, self.hamilton.n_site)) # quantum number for 1st sub-system
             self.q2_numbr = np.zeros((self.num_steps + 1, self.hamilton.n_site)) # quantum number for 2nd sub-system
         else:
             self.qu_numbr = np.zeros((self.num_steps + 1, self.hamilton.n_site)) # quantum number
+
+        if self.hamilton.classical:
+            self.position = np.zeros((self.num_steps + 1, self.hamilton.n_site))  # position
+            self.momentum = np.zeros((self.num_steps + 1, self.hamilton.n_site))  # momentum
+            self.pos_squa = np.zeros((self.num_steps + 1, self.hamilton.n_site))  # position squared
+            self.mom_squa = np.zeros((self.num_steps + 1, self.hamilton.n_site))  # momentum uncertainty
+            self.pos_wide = np.zeros((self.num_steps + 1, self.hamilton.n_site))  # position uncertainty
+            self.mom_wide = np.zeros((self.num_steps + 1, self.hamilton.n_site))  # momentum uncertainty
+            self.unc_prod = np.zeros((self.num_steps + 1, self.hamilton.n_site))  # uncertainty product
 
     def observe(self, i, iterations=0):
         """
@@ -140,7 +142,7 @@ class QuantumMechanics(Mechanics):
                         'site |  qu_number')
                     print(17 * '-')
 
-            # Entries of table with site-specific information
+           # Entries of table with site-specific information
             for j in range(self.hamilton.n_site):
                 rho = self.rho_site[i,j]
                 if self.hamilton.bipartite:
