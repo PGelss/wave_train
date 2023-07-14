@@ -46,8 +46,8 @@ class QuantumMechanics(Mechanics):
         self.unc_prod = np.zeros((self.num_steps + 1, self.hamilton.n_site))  # uncertainty product
 
         if self.hamilton.bipartite:
-            self.ex_numbr = np.zeros((self.num_steps + 1, self.hamilton.n_site)) # quantum number for excitons
-            self.ph_numbr = np.zeros((self.num_steps + 1, self.hamilton.n_site)) # quantum number for phonons
+            self.q1_numbr = np.zeros((self.num_steps + 1, self.hamilton.n_site)) # quantum number for 1st sub-system
+            self.q2_numbr = np.zeros((self.num_steps + 1, self.hamilton.n_site)) # quantum number for 2nd sub-system
         else:
             self.qu_numbr = np.zeros((self.num_steps + 1, self.hamilton.n_site)) # quantum number
 
@@ -129,22 +129,23 @@ class QuantumMechanics(Mechanics):
             # Header of table with site-specific information
             print(' ')
             if self.hamilton.bipartite:
-                print('site |  qu_n (ex) |  qu_n (ph) |   position |   momentum |    Dx (ph) |    Dp (ph) |  DxDp (ph)')
+                print('site |  qu_n (1)  |  qu_n (2)  |   pos. (2) |   mom. (2) |    Dx (2)  |    Dp (2)  |  DxDp (2)')
                 print(96 * '-')
-            elif self.hamilton.classical:
-                print('site | qu_number |   position |   momentum |    Dx (ph) |    Dp (ph) |  DxDp (ph)')
-                print(82 * '-')
             else:
-                print(
-                    'site |  qu_number')
-                print(17 * '-')
+                if self.hamilton.classical:
+                    print('site | qu_number |   position |   momentum |    Dx      |    Dp      |  DxDp')
+                    print(82 * '-')
+                else:
+                    print(
+                        'site |  qu_number')
+                    print(17 * '-')
 
             # Entries of table with site-specific information
             for j in range(self.hamilton.n_site):
                 rho = self.rho_site[i,j]
                 if self.hamilton.bipartite:
-                    self.ex_numbr[i, j] = np.real_if_close(                               np.trace(rho @ self.hamilton.ex_numbr), tol=TOLERANCE)
-                    self.ph_numbr[i, j] = np.real_if_close(                               np.trace(rho @ self.hamilton.ph_numbr), tol=TOLERANCE)
+                    self.q1_numbr[i, j] = np.real_if_close(                               np.trace(rho @ self.hamilton.q1_numbr), tol=TOLERANCE)
+                    self.q2_numbr[i, j] = np.real_if_close(                               np.trace(rho @ self.hamilton.q2_numbr), tol=TOLERANCE)
                 else:
                     self.qu_numbr[i, j] = np.real_if_close(                               np.trace(rho @ self.hamilton.qu_numbr), tol=TOLERANCE)
                 if self.hamilton.classical:
@@ -157,29 +158,31 @@ class QuantumMechanics(Mechanics):
                     self.unc_prod[i, j] =                                             self.pos_wide[i,j] * self.mom_wide[i,j]  # uncertainty product
 
                 if self.hamilton.bipartite:
-                    print(str("%4d" % j) + ' | ' + str("%10f" % self.ex_numbr[i, j]) + ' | ' + str(
-                        "%10f" % self.ph_numbr[i, j]) + ' | ' + str("%10f" % self.position[i, j]) + ' | ' + str(
+                    print(str("%4d" % j) + ' | ' + str("%10f" % self.q1_numbr[i, j]) + ' | ' + str(
+                        "%10f" % self.q2_numbr[i, j]) + ' | ' + str("%10f" % self.position[i, j]) + ' | ' + str(
                         "%10f" % self.momentum[i, j]) + ' | ' + str("%10f" % self.pos_wide[i, j]) + " | " + \
                           str("%10f" % self.mom_wide[i, j]) + " | " + str("%10f") % self.unc_prod[i, j] )
-                elif self.hamilton.classical:
-                    print(str("%4d" % j) + ' |' + str("%10f" % self.qu_numbr[i, j]) + ' | ' + str(
-                        "%10f" % self.position[i, j]) + ' | ' + str("%10f" % self.momentum[i, j]) + ' | ' + \
-                          str("%10f" % self.pos_wide[i, j]) + ' | ' + str("%10f" % self.mom_wide[i, j]) + " | " + \
-                          str("%10f" % self.unc_prod[i, j]))
                 else:
-                    print(str("%4d" % j) + ' |' + str("%10f" % self.qu_numbr[i, j]))
+                    if self.hamilton.classical:
+                        print(str("%4d" % j) + ' |' + str("%10f" % self.qu_numbr[i, j]) + ' | ' + str(
+                            "%10f" % self.position[i, j]) + ' | ' + str("%10f" % self.momentum[i, j]) + ' | ' + \
+                              str("%10f" % self.pos_wide[i, j]) + ' | ' + str("%10f" % self.mom_wide[i, j]) + " | " + \
+                              str("%10f" % self.unc_prod[i, j]))
+                    else:
+                        print(str("%4d" % j) + ' |' + str("%10f" % self.qu_numbr[i, j]))
 
             # Footer of table with site-specific information
             if self.hamilton.bipartite:
                 print(96 * '-')
-                print(' sum | ' + str("%10f" % np.sum(self.ex_numbr[i, :])) + ' | ' + str(
-                    "%10f" % np.sum(self.ph_numbr[i, :])))
-            elif self.hamilton.classical:
-                print(82 * '-')
-                print(' sum |' + str("%10f" % np.sum(self.qu_numbr[i, :])))
+                print(' sum | ' + str("%10f" % np.sum(self.q1_numbr[i, :])) + ' | ' + str(
+                    "%10f" % np.sum(self.q2_numbr[i, :])))
             else:
-                print(17 * '-')
-                print(' sum |' + str("%10f" % np.sum(self.qu_numbr[i, :])))
+                if self.hamilton.classical:
+                    print(82 * '-')
+                    print(' sum |' + str("%10f" % np.sum(self.qu_numbr[i, :])))
+                else:
+                    print(17 * '-')
+                    print(' sum |' + str("%10f" % np.sum(self.qu_numbr[i, :])))
             print(' ')
 
         # RMSD of positions from reference solution (if available)

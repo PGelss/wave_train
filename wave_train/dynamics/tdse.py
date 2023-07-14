@@ -23,7 +23,7 @@ class TDSE(QuantumMechanics):
                  save_file=None, load_file=None, compare=None):
         """
         hamilton: instance of physical object (quantum Hamiltonian)
-            Either one Exciton, Phonon, Coupled or other classes
+            Either one of Exciton, Phonon, Coupled or other classes
         num_steps: int 
             number of (main) time steps
         step_size: float
@@ -288,8 +288,8 @@ How to compare with reference    : {}
         self.e_min = self.e_init*0.9
         self.e_max = self.e_init*1.1
 
-        # Analytic solutions in terms of Bessel functions for excitons on an homogenous chain
-        if self.hamilton.name == 'Exciton' and self.hamilton.homogen and not self.hamilton.periodic:
+        # Analytic solutions in terms of Bessel functions: for linear homogenous 2-state systems only!
+        if self.hamilton.n_dim == 2 and self.hamilton.homogen and not self.hamilton.periodic:
 
             # If only a single site is initially excited
             if hasattr(self, 'localized'):
