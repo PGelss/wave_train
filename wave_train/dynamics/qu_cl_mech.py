@@ -32,7 +32,7 @@ class QuantClassMechanics(Mechanics):
         # Quantum subsystem
         self.norm = np.zeros(self.num_steps + 1)  # norm of state vector
         self.auto = np.zeros(self.num_steps + 1, dtype=complex) # autocorrelation
-        self.q1_numbr = np.zeros((self.num_steps + 1, self.hamilton.n_site))  # quantum number for excitons
+        self.q1_numbr = np.zeros((self.num_steps + 1, self.hamilton.n_site))  # quantum number for 1st sub-system
 
         # Classical subsystem
         self.position = np.zeros((self.num_steps + 1, self.hamilton.n_site))  # position
