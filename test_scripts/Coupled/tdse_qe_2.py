@@ -43,7 +43,7 @@ def coupled_qe_2(batch_mode):
         num_steps=50,                    # number of main time steps
         step_size=20,                    # size of main time steps
         sub_steps=20,                    # number of sub steps
-        solver='sm',                     # can be 'se' (symmetrized Euler) or 'sm' (Strang-Marchuk splitting) or ...
+        solver='sm',                     # can be 's2' (symmetrized Euler) or 'sm' (Strang-Marchuk splitting) or ...
         normalize=0,                     # whether|how to normalize the solution, can be 0|2
         max_rank=12,                     # max rank of solution
         repeats=15,                      # number of sweeps (implicit ODE solvers only!)
