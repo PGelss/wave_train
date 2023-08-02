@@ -39,11 +39,13 @@ class QuantumMechanics(Mechanics):
                              self.hamilton.n_dim, self.hamilton.n_dim), dtype=complex)
 
         if self.hamilton.bipartite:
-            self.q1_numbr = np.zeros((self.num_steps + 1, self.hamilton.n_site)) # quantum number for 1st sub-system
-            self.q2_numbr = np.zeros((self.num_steps + 1, self.hamilton.n_site)) # quantum number for 2nd sub-system
+            self.q1_numbr = np.zeros((self.num_steps + 1, self.hamilton.n_site))  # quantum number for 1st sub-system
+            self.q2_numbr = np.zeros((self.num_steps + 1, self.hamilton.n_site))  # quantum number for 2nd sub-system
         else:
-            self.qu_numbr = np.zeros((self.num_steps + 1, self.hamilton.n_site)) # quantum number
-
+            self.qu_numbr = np.zeros((self.num_steps + 1, self.hamilton.n_site))  # quantum number
+            self.qu_sig_1 = np.zeros((self.num_steps + 1, self.hamilton.n_site))  # Pauli matrix
+            self.qu_sig_2 = np.zeros((self.num_steps + 1, self.hamilton.n_site))  # Pauli matrix
+            self.qu_sig_3 = np.zeros((self.num_steps + 1, self.hamilton.n_site))  # Pauli matrix
         if self.hamilton.classical:
             self.position = np.zeros((self.num_steps + 1, self.hamilton.n_site))  # position
             self.momentum = np.zeros((self.num_steps + 1, self.hamilton.n_site))  # momentum
@@ -139,25 +141,28 @@ class QuantumMechanics(Mechanics):
                     print(82 * '-')
                 else:
                     print(
-                        'site |  qu_number')
-                    print(17 * '-')
+                        'site | qu_number |  sigma_1  |  sigma_2  |  sigma_3')
+                    print(52 * '-')
 
            # Entries of table with site-specific information
             for j in range(self.hamilton.n_site):
                 rho = self.rho_site[i,j]
                 if self.hamilton.bipartite:
-                    self.q1_numbr[i, j] = np.real_if_close(                               np.trace(rho @ self.hamilton.q1_numbr), tol=TOLERANCE)
-                    self.q2_numbr[i, j] = np.real_if_close(                               np.trace(rho @ self.hamilton.q2_numbr), tol=TOLERANCE)
+                    self.q1_numbr[i, j] = np.real_if_close(np.trace(rho @ self.hamilton.q1_numbr), tol=TOLERANCE)
+                    self.q2_numbr[i, j] = np.real_if_close(np.trace(rho @ self.hamilton.q2_numbr), tol=TOLERANCE)
                 else:
-                    self.qu_numbr[i, j] = np.real_if_close(                               np.trace(rho @ self.hamilton.qu_numbr), tol=TOLERANCE)
+                    self.qu_numbr[i, j] = np.real_if_close(np.trace(rho @ self.hamilton.qu_numbr), tol=TOLERANCE)
+                    self.qu_sig_1[i, j] = np.real_if_close(np.trace(rho @ self.hamilton.qu_sig_1), tol=TOLERANCE)
+                    self.qu_sig_2[i, j] = np.real_if_close(np.trace(rho @ self.hamilton.qu_sig_2), tol=TOLERANCE)
+                    self.qu_sig_3[i, j] = np.real_if_close(np.trace(rho @ self.hamilton.qu_sig_3), tol=TOLERANCE)
                 if self.hamilton.classical:
-                    self.position[i, j] =     np.real_if_close(self.hamilton.pos_conv[j]    * np.trace(rho @ self.hamilton.position), tol=TOLERANCE)
-                    self.momentum[i, j] =     np.real_if_close(self.hamilton.mom_conv[j]    * np.trace(rho @ self.hamilton.momentum), tol=TOLERANCE)
-                    self.pos_squa[i, j] =     np.real_if_close(self.hamilton.pos_conv[j]**2 * np.trace(rho @ self.hamilton.pos_squa), tol=TOLERANCE)
-                    self.mom_squa[i, j] =     np.real_if_close(self.hamilton.mom_conv[j]**2 * np.trace(rho @ self.hamilton.mom_squa), tol=TOLERANCE)
-                    self.pos_wide[i, j] =     np.real_if_close(                  np.sqrt(self.pos_squa[i,j] - self.position[i,j]**2), tol=TOLERANCE)
-                    self.mom_wide[i, j] =     np.real_if_close(                  np.sqrt(self.mom_squa[i,j] - self.momentum[i,j]**2), tol=TOLERANCE)
-                    self.unc_prod[i, j] =                                             self.pos_wide[i,j] * self.mom_wide[i,j]  # uncertainty product
+                    self.position[i, j] = np.real_if_close(self.hamilton.pos_conv[j]    * np.trace(rho @ self.hamilton.position), tol=TOLERANCE)
+                    self.momentum[i, j] = np.real_if_close(self.hamilton.mom_conv[j]    * np.trace(rho @ self.hamilton.momentum), tol=TOLERANCE)
+                    self.pos_squa[i, j] = np.real_if_close(self.hamilton.pos_conv[j]**2 * np.trace(rho @ self.hamilton.pos_squa), tol=TOLERANCE)
+                    self.mom_squa[i, j] = np.real_if_close(self.hamilton.mom_conv[j]**2 * np.trace(rho @ self.hamilton.mom_squa), tol=TOLERANCE)
+                    self.pos_wide[i, j] = np.real_if_close(np.sqrt(self.pos_squa[i,j] - self.position[i,j]**2), tol=TOLERANCE)
+                    self.mom_wide[i, j] = np.real_if_close(np.sqrt(self.mom_squa[i,j] - self.momentum[i,j]**2), tol=TOLERANCE)
+                    self.unc_prod[i, j] = self.pos_wide[i,j] * self.mom_wide[i,j]  # uncertainty product
 
                 if self.hamilton.bipartite:
                     print(str("%4d" % j) + ' | ' + str("%10f" % self.q1_numbr[i, j]) + ' | ' + str(
@@ -171,7 +176,10 @@ class QuantumMechanics(Mechanics):
                               str("%10f" % self.pos_wide[i, j]) + ' | ' + str("%10f" % self.mom_wide[i, j]) + " | " + \
                               str("%10f" % self.unc_prod[i, j]))
                     else:
-                        print(str("%4d" % j) + ' |' + str("%10f" % self.qu_numbr[i, j]))
+                        print(str("%4d" % j) + ' |' + str("%10f" % self.qu_numbr[i, j]) + \
+                              ' |' + str("%10f" % self.qu_sig_1[i, j]) + \
+                              ' |' + str("%10f" % self.qu_sig_2[i, j]) + \
+                              ' |' + str("%10f" % self.qu_sig_3[i, j]))
 
             # Footer of table with site-specific information
             if self.hamilton.bipartite:
@@ -183,7 +191,7 @@ class QuantumMechanics(Mechanics):
                     print(82 * '-')
                     print(' sum |' + str("%10f" % np.sum(self.qu_numbr[i, :])))
                 else:
-                    print(17 * '-')
+                    print(52 * '-')
                     print(' sum |' + str("%10f" % np.sum(self.qu_numbr[i, :])))
             print(' ')
 

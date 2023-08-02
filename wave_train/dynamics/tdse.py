@@ -433,11 +433,9 @@ How to compare with reference    : {}
                                                 initial_value=self.psi, step_size=self.sub_size,
                                                 number_of_steps=self.sub_steps, threshold=self.threshold,
                                                 max_rank=self.max_rank, normalize=self.normalize)
-                    
                 elif self.solver == 'vp':  # time-dependent variational principle
                     psi = ode.tdvp(1j*self.operator, initial_value=self.psi, step_size=self.sub_size,
                                                 number_of_steps=self.sub_steps, normalize=self.normalize)
-
                 elif self.solver == 'qe':  # Quasi-exact propagation
                     self.psi = self.propagator @ self.psi
 
