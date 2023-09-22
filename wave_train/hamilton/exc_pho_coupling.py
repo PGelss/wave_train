@@ -6,10 +6,10 @@ from wave_train.hamilton.phonon import Phonon
 from wave_train.hamilton.exciton import Exciton
 
 
-class Coupled(Chain): 
+class Exc_Pho_Coupling(Chain):
     """
-    exciton-phonon coupling dynamics
-    --------------------------------
+    exciton-phonon coupling
+    -----------------------
     
     for a chain of exciton sites, connected by harmonic oscillators
         optionally with periodic boundaries
@@ -168,9 +168,9 @@ class Coupled(Chain):
             tau = self.tau
 
         coupled_str = """
------------------------------        
-EXCITONS - PHONONS - Coupling
------------------------------
+---------------------------        
+EXCITON - PHONON - Coupling
+---------------------------
  
 Linear tuning   constant (chi), localized     = {}
 Linear tuning   constant (rho), non-symmetric = {}

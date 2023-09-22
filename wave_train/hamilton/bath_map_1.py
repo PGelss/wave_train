@@ -74,7 +74,8 @@ Eigenfrequency of the TLS (omega_0) = {}
         # Call corresponding method from superclass Chain
         super().get_2Q(n_dim)
 
-        # Set up ground and first excited state
+        # Set up ground and excited state
+        # Assuming that the two-level-system is in a Schroedinger CAT state
         self.ground = np.zeros(n_dim)
         self.ground[0] = 1
         self.excited = np.zeros(n_dim)

@@ -1,4 +1,4 @@
-from wave_train.hamilton.coupled import Coupled
+from wave_train.hamilton.exc_pho_coupling import Exc_Pho_Coupling
 from wave_train.dynamics.tdse import TDSE
 from wave_train.io.logging import TeeLogger
 from os.path import basename, splitext
@@ -15,7 +15,7 @@ def coupled_qe_2(batch_mode):
         logger = TeeLogger(log_file=my_file + ".log")
 
     # Set up the coupled exciton-phonon Hamiltonian for a chain
-    hamilton = Coupled(
+    hamilton = Exc_Pho_Coupling(
         n_site=3,                        # number of sites
         periodic=False,                  # periodic boundary conditions
         homogen=True,                    # homogeneous chain/ring
@@ -39,7 +39,7 @@ def coupled_qe_2(batch_mode):
 
     # Set up TDSE solver
     dynamics = TDSE(
-        hamilton=hamilton,  # choice of Hamiltonian, see above
+        hamilton=hamilton,               # choice of Hamiltonian, see above
         num_steps=50,                    # number of main time steps
         step_size=20,                    # size of main time steps
         sub_steps=20,                    # number of sub steps

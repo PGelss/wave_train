@@ -1,4 +1,4 @@
-from wave_train.hamilton.coupled import Coupled
+from wave_train.hamilton.exc_pho_coupling import Exc_Pho_Coupling
 from wave_train.dynamics.qcmd import QCMD
 from wave_train.io.logging import TeeLogger
 from os.path import basename, splitext
@@ -14,13 +14,11 @@ def coupled_qcmd(batch_mode):
     if not batch_mode:
         logger = TeeLogger(log_file=my_file + ".log")
 
-    # Define properties of chain/ring system
-
     # Set up the coupled exciton-phonon Hamiltonian for a chain
-    hamilton = Coupled(
+    hamilton = Exc_Pho_Coupling(
         n_site=15,                       # number of sites
         periodic=False,                  # periodic boundary conditions
-        homogen=True,                    # Homogeneous chain/ring
+        homogen=True,                    # homogeneous chain/ring
         alpha=1e-1,                      # excitonic site energy
         beta=-1e-2,                      # coupling strength (NN)
         eta=0,                           # constant energy offset
@@ -46,8 +44,10 @@ def coupled_qcmd(batch_mode):
         compare=None                     # How to do the comparison with reference data
     )
 
-    # Set up initial state:  see Georgiev:2019 paper
-    dynamics.gaussian(w_0=0.75)          # Initial "Gaussian" with "width 3"
+    # Set up initial state
+    dynamics.fundamental()               # fundamental excitation near center of chain
+    # dynamics.gaussian()
+    # dynamics.sec_hyp(w_0=0.25)
 
     # Batch mode
     if batch_mode:
