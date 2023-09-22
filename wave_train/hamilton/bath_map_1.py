@@ -3,7 +3,7 @@ import numpy as np
 from wave_train.hamilton.chain import Chain
 
 
-class Boson(Chain):
+class Bath_Map_1(Chain):
 
     """
     Boson ...
@@ -79,10 +79,8 @@ Eigenfrequency of the TLS (omega_0) = {}
         self.ground = np.zeros(n_dim)
         self.ground[0] = 1
         self.excited = np.zeros(n_dim)
-        self.excited[1] = 1
-        self.cat = np.zeros(n_dim)
-        self.cat[0] = np.sqrt(0.5)
-        self.cat[1] = np.sqrt(0.5)
+        self.excited[0] = np.sqrt(0.5)
+        self.excited[1] = np.sqrt(0.5)
         
         
     def get_SLIM(self, n_dim=2):
@@ -132,10 +130,10 @@ Eigenfrequency of the TLS (omega_0) = {}
 
 
         # define lists of ndarrays
-        self.S = [self.omega_0*sigmaz] + [cavity_onsite[i]*self.qu_numbr for i in range(1,self.n_site)]
-        self.L = [np.stack((self.eta*sigmax, self.eta*self.position), axis=-1)] + [np.stack((chain_bond[i]*self.lowering,chain_bond[i]*self.raising), axis=-1) for i in range(1,self.n_site-1)] + [None]
+        self.S = [-self.omega_0*sigmaz] + [cavity_onsite[i]*self.qu_numbr for i in range(1,self.n_site)]
+        self.L = [0.5*np.stack((self.eta*sigmax, self.eta*self.eta*sigmax), axis=-1)] + [0.5*np.stack((chain_bond[i]*self.lowering,chain_bond[i]*self.raising), axis=-1) for i in range(1,self.n_site-1)] + [None]
         self.I = [np.eye(3) for i in range(self.n_site)]
-        self.M = [None, np.stack((self.position,sigmax))] + [np.stack((self.raising,self.lowering)) for i in range(2,self.n_site)]
+        self.M = [None, np.stack((self.position, self.position))] + [np.stack((self.raising,self.lowering)) for i in range(2,self.n_site)]
 
 
 
