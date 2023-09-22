@@ -19,7 +19,7 @@ class TDSE(QuantumMechanics):
 
     def __init__(self, hamilton, num_steps, step_size, sub_steps=1,
                  solver='s2', normalize=0,
-                 max_rank=20, repeats=20, threshold=1e-12, krylov_dimension=5,
+                 max_rank=20, repeats=20, threshold=1e-12,
                  save_file=None, load_file=None, compare=None):
         """
         hamilton: instance of physical object (quantum Hamiltonian)
@@ -63,7 +63,6 @@ class TDSE(QuantumMechanics):
         self.max_rank   = max_rank
         self.repeats    = repeats
         self.threshold  = threshold
-        self.krylov_dimension = krylov_dimension
         self.save_file  = save_file
         self.load_file  = load_file
         self.compare    = compare
@@ -437,8 +436,8 @@ How to compare with reference    : {}
                 elif self.solver == 'vp':  # time-dependent variational principle
                     psi = ode.tdvp(1j*self.operator, initial_value=self.psi, step_size=self.sub_size,
                                                 number_of_steps=self.sub_steps, normalize=self.normalize)
-                elif self.solver == 'kr':  # Krylov subspace method
-                    self.psi = ode.krylov(1j*self.operator, initial_value=self.psi, dimension=self.krylov_dimension, step_size=self.sub_size, threshold=self.threshold,
+                elif self.solver in ['k2', 'k4', 'k6', 'k8']:  # Krylov subspace method
+                    self.psi = ode.krylov(1j*self.operator, initial_value=self.psi, dimension=int(self.solver[1]), step_size=self.sub_size, threshold=self.threshold,
                                                max_rank=self.max_rank, normalize=self.normalize)
                 elif self.solver == 'qe':  # Quasi-exact propagation
                     self.psi = self.propagator @ self.psi
@@ -447,7 +446,7 @@ How to compare with reference    : {}
                     sys.exit('Wrong choice of solver')
 
                 # Prepare for next time step
-                if (self.solver != 'qe') and (self.solver != 'kr'):
+                if self.solver not in ['qe', 'k2', 'k4', 'k6', 'k8']:
                     self.psi = psi[-1]
                     self.psi_guess = self.psi
 
