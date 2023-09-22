@@ -6,10 +6,8 @@ from wave_train.hamilton.chain import Chain
 class Bath_Map_1(Chain):
 
     """
-    Boson ...
-    ---------------------------------
-    
-    ...
+    Hamiltonian for a two level system coupled to a bath
+    using mapping of bath degrees of freedom to a chain
     
     Parent class is chain.
     """
@@ -54,9 +52,10 @@ class Bath_Map_1(Chain):
         omega_0 = self.omega_0
         
         boson_str = """
-----------------------
-Hamiltonian for BOSONS
-----------------------      
+----------------------------------------------------
+Hamiltonian for a two level system coupled to a bath
+using mapping of bath degrees of freedom to a chain 
+----------------------------------------------------  
 
 Coupling between TLS and first bath site (eta)   = {}
 Type of spectral density function (s)  = {}

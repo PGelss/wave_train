@@ -8,7 +8,7 @@ from wave_train.hamilton.exciton import Exciton
 
 class Coupled(Chain): 
     """
-    Coupled electron-phonon dynamics 
+    exciton-phonon coupling dynamics
     --------------------------------
     
     for a chain of exciton sites, connected by harmonic oscillators
@@ -169,7 +169,7 @@ class Coupled(Chain):
 
         coupled_str = """
 -----------------------------        
-Coupling EXCITONS and PHONONS
+EXCITONS - PHONONS - Coupling
 -----------------------------
  
 Linear tuning   constant (chi), localized     = {}
