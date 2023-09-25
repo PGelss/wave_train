@@ -437,8 +437,9 @@ How to compare with reference    : {}
                     psi = ode.tdvp(1j*self.operator, initial_value=self.psi, step_size=self.sub_size,
                                                 number_of_steps=self.sub_steps, normalize=self.normalize)
                 elif self.solver in ['k2', 'k4', 'k6', 'k8']:  # Krylov subspace method
-                    self.psi = ode.krylov(1j*self.operator, initial_value=self.psi, dimension=int(self.solver[1]), step_size=self.sub_size, threshold=self.threshold,
-                                               max_rank=self.max_rank, normalize=self.normalize)
+                    for step in range(self.sub_steps):
+                        self.psi = ode.krylov(1j*self.operator, initial_value=self.psi, dimension=int(self.solver[1]), step_size=self.sub_size, threshold=self.threshold,
+                                                   max_rank=self.max_rank, normalize=self.normalize)
                 elif self.solver == 'qe':  # Quasi-exact propagation
                     self.psi = self.propagator @ self.psi
 
