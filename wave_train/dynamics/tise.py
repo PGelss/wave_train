@@ -22,7 +22,7 @@ class TISE(QuantumMechanics):
         Parameters:
         -----------
         hamilton: instance of physical object (quantum Hamiltonian)
-            Either one Exciton, Phonon, Coupled or other classes
+            Either one of Exciton, Phonon, Coupled or other classes
         n_levels: int
             number of solutions (energy levels) of the TISE
         solver: string, optional

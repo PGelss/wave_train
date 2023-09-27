@@ -314,15 +314,15 @@ def configure_quant_numbers2_basic(figure, dynamics, outer_grid=None, style=figu
     axes_number.set_yticks(np.linspace(0, 2, 5))
     axes_number.set_ylabel("Quantum numbers")
 
-    # generate initial bars of height zero for excitonic and phononic system
-    bars_exc = np.arange(dynamics.hamilton.n_site) - 0.1
-    bars_pho = np.arange(dynamics.hamilton.n_site) + 0.1
+    # generate initial bars of height zero for the two sub-systems
+    bars_s1 = np.arange(dynamics.hamilton.n_site) - 0.1
+    bars_s2 = np.arange(dynamics.hamilton.n_site) + 0.1
     heights  = np.zeros(dynamics.hamilton.n_site)
 
-    # first n_site rectangles belong to excitonic quantum numbers only,
-    # second half to phononic quantum numbers only
-    axes_number.bar(bars_exc, heights, width=0.2, color='green', label="Quantum")
-    axes_number.bar(bars_pho, heights, width=0.2, color='orange', label="Classical")
+    # first n_site rectangles belong to 1st sub-system quantum numbers only,
+    # second half to 2nd sub-system quantum numbers only
+    axes_number.bar(bars_s1, heights, width=0.2, color='green', label="Quantum")
+    axes_number.bar(bars_s2, heights, width=0.2, color='orange', label="Classical")
     axes_number.legend()
 
     apply_styles([axes_number], style)
@@ -657,7 +657,7 @@ def configure_quant_displace2_expect_qcmd(figure, dynamics, style=figure_style):
     Quantum numbers for each site are retrieved from the
     (reduced) density matrices and the number operators
     using the trace formula for expectation values.
-    These operations are done separately for excitonic and phononic densities
+    These operations are done separately for the two sub-sytems' densities
     """
     outer_grid = gridspec.GridSpec(3, 2, figure=figure)
     configure_quant_displace2_basic(figure, dynamics, outer_grid, style=style)
@@ -745,13 +745,13 @@ def update_quant_numbers2_basic(i, figure, dynamics, writer, saving):
     dynamics.update_solve(i)
 
     # get all rectangle instances of the first plot
-    # first half of array corresponds to excitonic values
-    # second half of array corresponds to phononic values
+    # first half of array corresponds to 1st sub-system values
+    # second half of array corresponds to 2nd sub-system values
     rectangles = figure.axes[0].patches
 
     for k in range(dynamics.hamilton.n_site):
-        rectangles[k].set_height(dynamics.ex_numbr[i, k])
-        rectangles[k + dynamics.hamilton.n_site].set_height(dynamics.ph_numbr[i, k])
+        rectangles[k].set_height(dynamics.q1_numbr[i, k])
+        rectangles[k + dynamics.hamilton.n_site].set_height(dynamics.q2_numbr[i, k])
 
     figure.suptitle(dynamics.head[i])
 
@@ -765,7 +765,7 @@ def update_quant_displace2_basic(i, figure, dynamics, writer, saving):
 
      # split densities and get expectation values of number operators
     for j in range(dynamics.hamilton.n_site):
-        rectangles[j].set_height(dynamics.ex_numbr[i, j])
+        rectangles[j].set_height(dynamics.q1_numbr[i, j])
         height = scale * dynamics.position[i, j]
 
         rectangles[j + dynamics.hamilton.n_site].set_height(height)
@@ -777,17 +777,17 @@ def update_positions2_basic(i, figure, dynamics, writer, saving):
     dynamics.update_solve(i)
 
     pos = scaling() * dynamics.position[i]
-    nex = dynamics.ex_numbr[i]
+    n_1 = dynamics.q1_numbr[i]
 
-    # all even indices correspond to phononic system
-    phononic    = np.asarray(figure.axes[0].lines)[0::2]
-    # all odd indices correspond to excitonic system
-    excitonic   = np.asarray(figure.axes[0].lines)[1::2]
+    # all even indices correspond to 2nd sub-system
+    s2 = np.asarray(figure.axes[0].lines)[0::2]
+    # all odd indices correspond to 1st sub-system
+    s1 = np.asarray(figure.axes[0].lines)[1::2]
 
-    for j, (line_ph, line_ex) in enumerate(zip(phononic, excitonic)):
-        line_ph.set_data([j, j + pos[j]], [0, 0])
-        # move excitonic quantum number with point of displacement
-        line_ex.set_data([j + pos[j], j + pos[j]], [0, nex[j]])
+    for j, (line_2, line_1) in enumerate(zip(s2, s1)):
+        line_2.set_data([j, j + pos[j]], [0, 0])
+        # move 1st sub-system quantum number with point of displacement
+        line_1.set_data([j + pos[j], j + pos[j]], [0, n_1[j]])
 
     figure.suptitle(dynamics.head[i])
 

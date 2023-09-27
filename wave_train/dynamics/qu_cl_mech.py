@@ -32,7 +32,7 @@ class QuantClassMechanics(Mechanics):
         # Quantum subsystem
         self.norm = np.zeros(self.num_steps + 1)  # norm of state vector
         self.auto = np.zeros(self.num_steps + 1, dtype=complex) # autocorrelation
-        self.ex_numbr = np.zeros((self.num_steps + 1, self.hamilton.n_site))  # quantum number for excitons
+        self.q1_numbr = np.zeros((self.num_steps + 1, self.hamilton.n_site))  # quantum number for 1st sub-system
 
         # Classical subsystem
         self.position = np.zeros((self.num_steps + 1, self.hamilton.n_site))  # position
@@ -91,16 +91,16 @@ class QuantClassMechanics(Mechanics):
         for j in range(self.hamilton.n_site):
             self.position[i, j] = self.pos[j]
             self.momentum[i, j] = self.mom[j]
-            self.ex_numbr[i, j] = np.abs(self.psi[j]) ** 2
+            self.q1_numbr[i, j] = np.abs(self.psi[j]) ** 2
 
-            print(str("%4d" % j) + ' | ' + str("%10f" % self.ex_numbr[i, j]) + ' | ' + str("%10f" % self.position[i, j]) + ' | ' + str(
+            print(str("%4d" % j) + ' | ' + str("%10f" % self.q1_numbr[i, j]) + ' | ' + str("%10f" % self.position[i, j]) + ' | ' + str(
                 "%10f" % self.momentum[i, j])  )
 
 
         # Footer of table with site-specific information
         print(43 * '-')
         print(' sum' +
-              ' | ' + str("%10f" % np.sum(self.ex_numbr[i, :])) +
+              ' | ' + str("%10f" % np.sum(self.q1_numbr[i, :])) +
               ' | ' + str("%10f" % np.sum(self.position[i, :])) +
               ' | ' + str("%10f" % np.sum(self.momentum[i, :])) )
         print (' ')

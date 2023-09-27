@@ -22,7 +22,11 @@ class Chain:
                 Homogeneous chain/ring
             really_homogen: boolean
                 Really a homogeneous chain/ring
-
+            classical: boolean
+                Whether a system has a well-defined classical limit
+            bipartite: boolean
+                Whether a system is bipartite, i.e. comprising
+                two classes of particles, e.g. fast and slow.
         """
 
         if n_site < 2:
@@ -32,8 +36,9 @@ class Chain:
         self.n_site = n_site
         self.periodic = periodic
         self.homogen = homogen
-
         self.really_homogen = self.homogen
+        self.classical = []
+        self.bipartite = []
 
     def __str__(self):
 
@@ -67,8 +72,17 @@ Homogeneous chain/ring         : {}
         self.qu_numbr = self.raising @ self.lowering  # number operator
         self.position = self.raising + self.lowering  # position operator
         self.momentum = self.raising - self.lowering  # momentum operator
-        self.pos_squa = self.position @ self.position
-        self.mom_squa = self.momentum @ self.momentum
+        self.pos_squa = self.position @ self.position # position squared
+        self.mom_squa = self.momentum @ self.momentum # momentum squared
+        self.qu_sig_1 = np.zeros((n_dim,n_dim))       # 1st Pauli matrix
+        self.qu_sig_1[0, 1] = 1
+        self.qu_sig_1[1, 0] = 1
+        self.qu_sig_2 = np.zeros((n_dim,n_dim), dtype=complex)       # 2nd Pauli matrix
+        self.qu_sig_2[0, 1] = -1j
+        self.qu_sig_2[1, 0] = 1j
+        self.qu_sig_3 = np.zeros((n_dim,n_dim))       # 3rd Pauli matrix
+        self.qu_sig_3[0, 0] = 1
+        self.qu_sig_3[1, 1] = -1
 
     def get_TT(self, n_basis, qtt=False):
         """

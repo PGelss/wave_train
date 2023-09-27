@@ -6,10 +6,10 @@ from wave_train.hamilton.phonon import Phonon
 from wave_train.hamilton.exciton import Exciton
 
 
-class Coupled(Chain): 
+class Exc_Pho_Coupling(Chain):
     """
-    Coupled electron-phonon dynamics 
-    --------------------------------
+    exciton-phonon coupling
+    -----------------------
     
     for a chain of exciton sites, connected by harmonic oscillators
         optionally with periodic boundaries
@@ -168,9 +168,9 @@ class Coupled(Chain):
             tau = self.tau
 
         coupled_str = """
------------------------------        
-Coupling EXCITONS and PHONONS
------------------------------
+---------------------------        
+EXCITON - PHONON - Coupling
+---------------------------
  
 Linear tuning   constant (chi), localized     = {}
 Linear tuning   constant (rho), non-symmetric = {}
@@ -207,16 +207,16 @@ Linear coupling constant (tau), pair distance = {}
         self.mom_conv = self.ph.mom_conv
 
         # Excitonic Hamiltonian in terms of creation/annihilation operators
-        self.ex_raise = np.kron(self.ex.raising,  self.ph.identity)  # raising  operator: excitons
-        self.ex_lower = np.kron(self.ex.lowering, self.ph.identity)  # lowering operator: excitons
-        self.ex_numbr = np.kron(self.ex.qu_numbr, self.ph.identity)  # number   operator: excitons
+        self.q1_raise = np.kron(self.ex.raising,  self.ph.identity)  # raising  operator: excitons
+        self.q1_lower = np.kron(self.ex.lowering, self.ph.identity)  # lowering operator: excitons
+        self.q1_numbr = np.kron(self.ex.qu_numbr, self.ph.identity)  # number   operator: excitons
 
         # Phononic Hamiltonian in terms of creation/annihilation operators
-        self.ph_raise = np.kron(self.ex.identity, self.ph.raising)   # raising  operator: phonons
-        self.ph_lower = np.kron(self.ex.identity, self.ph.lowering)  # lowering operator: phonons
-        self.ph_numbr = np.kron(self.ex.identity, self.ph.qu_numbr)  # number   operator: phonons
-        self.position = self.ph_raise + self.ph_lower                # position operator: phonons
-        self.momentum = self.ph_raise - self.ph_lower                # momentum operator: phonons
+        self.q2_raise = np.kron(self.ex.identity, self.ph.raising)   # raising  operator: phonons
+        self.q2_lower = np.kron(self.ex.identity, self.ph.lowering)  # lowering operator: phonons
+        self.q2_numbr = np.kron(self.ex.identity, self.ph.qu_numbr)  # number   operator: phonons
+        self.position = self.q2_raise + self.q2_lower                # position operator: phonons
+        self.momentum = self.q2_raise - self.q2_lower                # momentum operator: phonons
         self.pos_squa = self.position @ self.position
         self.mom_squa = self.momentum @ self.momentum
 
@@ -318,33 +318,33 @@ Value of n_ex must be set to two
                 sig_2[i] *= self.pos_conv[i]
 
         # Set up S,L,I,M operators
-        S_1 = self.ex_numbr                        # on site: excitons
-        S_2 = self.ph_numbr + self.identity / 2    # on site: phonons
-        S_3 = self.ex_numbr @ self.position        # on site: exciton-phonon-tuning (matrix product!)
+        S_1 = self.q1_numbr                        # on site: excitons
+        S_2 = self.q2_numbr + self.identity / 2    # on site: phonons
+        S_3 = self.q1_numbr @ self.position        # on site: exciton-phonon-tuning (matrix product!)
 
-        L_1 = self.ex_raise                        # NN interaction: exciton transfer
-        L_2 = self.ex_lower                        # NN interaction: exciton transfer
+        L_1 = self.q1_raise                        # NN interaction: exciton transfer
+        L_2 = self.q1_lower                        # NN interaction: exciton transfer
         L_3 = self.position                        # NN interaction: phonon coupling
-        L_4 = self.ex_numbr                        # NN interaction: ex-ph-tuning
+        L_4 = self.q1_numbr                        # NN interaction: ex-ph-tuning
         L_5 = self.position                        # NN interaction: ex-ph-tuning
         if tau_1[0] != 0:                          # NN interaction: ex-ph-coupling
-            L_6 = self.ex_raise
-            L_7 = self.ex_raise @ self.position
-            L_8 = self.ex_lower
-            L_9 = self.ex_lower @ self.position
+            L_6 = self.q1_raise
+            L_7 = self.q1_raise @ self.position
+            L_8 = self.q1_lower
+            L_9 = self.q1_lower @ self.position
 
         I = self.identity                          # identity operator
 
-        M_1 = self.ex_lower                        # NN interaction: exciton transfer
-        M_2 = self.ex_raise                        # NN interaction: exciton transfer
+        M_1 = self.q1_lower                        # NN interaction: exciton transfer
+        M_2 = self.q1_raise                        # NN interaction: exciton transfer
         M_3 = self.position                        # NN interaction: phonon coupling
         M_4 = self.position                        # NN interaction: ex-ph-tuning
-        M_5 = self.ex_numbr                        # NN interaction: ex-ph-tuning
+        M_5 = self.q1_numbr                        # NN interaction: ex-ph-tuning
         if tau_1[0] != 0:                          # NN interaction: ex-ph-coupling
-            M_6 = self.ex_lower @ self.position
-            M_7 = self.ex_lower
-            M_8 = self.ex_raise @ self.position
-            M_9 = self.ex_raise
+            M_6 = self.q1_lower @ self.position
+            M_7 = self.q1_lower
+            M_8 = self.q1_raise @ self.position
+            M_9 = self.q1_raise
 
         # Due to the use of the efficient frequencies nu_E, omg_E,
         # non-periodic phonon chains appear here as non-homogeneous

@@ -23,7 +23,7 @@ class TDSE(QuantumMechanics):
                  save_file=None, load_file=None, compare=None):
         """
         hamilton: instance of physical object (quantum Hamiltonian)
-            Either one Exciton, Phonon, Coupled or other classes
+            Either one of Exciton, Phonon, Coupled or other classes
         num_steps: int 
             number of (main) time steps
         step_size: float
@@ -288,8 +288,8 @@ How to compare with reference    : {}
         self.e_min = self.e_init*0.9
         self.e_max = self.e_init*1.1
 
-        # Analytic solutions in terms of Bessel functions for excitons on an homogenous chain
-        if self.hamilton.name == 'Exciton' and self.hamilton.homogen and not self.hamilton.periodic:
+        # Analytic solutions in terms of Bessel functions: for linear homogenous 2-state systems only!
+        if self.hamilton.n_dim == 2 and self.hamilton.homogen and not self.hamilton.periodic:
 
             # If only a single site is initially excited
             if hasattr(self, 'localized'):
@@ -433,11 +433,13 @@ How to compare with reference    : {}
                                                 initial_value=self.psi, step_size=self.sub_size,
                                                 number_of_steps=self.sub_steps, threshold=self.threshold,
                                                 max_rank=self.max_rank, normalize=self.normalize)
-                    
                 elif self.solver == 'vp':  # time-dependent variational principle
                     psi = ode.tdvp(1j*self.operator, initial_value=self.psi, step_size=self.sub_size,
                                                 number_of_steps=self.sub_steps, normalize=self.normalize)
-
+                elif self.solver in ['k2', 'k4', 'k6', 'k8']:  # Krylov subspace method
+                    for step in range(self.sub_steps):
+                        self.psi = ode.krylov(1j*self.operator, initial_value=self.psi, dimension=int(self.solver[1]), step_size=self.sub_size, threshold=self.threshold,
+                                                   max_rank=self.max_rank, normalize=self.normalize)
                 elif self.solver == 'qe':  # Quasi-exact propagation
                     self.psi = self.propagator @ self.psi
 
@@ -445,7 +447,7 @@ How to compare with reference    : {}
                     sys.exit('Wrong choice of solver')
 
                 # Prepare for next time step
-                if self.solver != 'qe':
+                if self.solver not in ['qe', 'k2', 'k4', 'k6', 'k8']:
                     self.psi = psi[-1]
                     self.psi_guess = self.psi
 

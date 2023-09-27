@@ -1,4 +1,4 @@
-from wave_train.hamilton.coupled import Coupled
+from wave_train.hamilton.exc_pho_coupling import Exc_Pho_Coupling
 from wave_train.dynamics.qcmd import QCMD
 from wave_train.io.logging import TeeLogger
 from os.path import basename, splitext
@@ -14,10 +14,12 @@ def coupled_qcmd(batch_mode):
     if not batch_mode:
         logger = TeeLogger(log_file=my_file + ".log")
 
+    # Define properties of chain/ring system
+
     # Set up the coupled exciton-phonon Hamiltonian for a chain
-    hamilton = Coupled(
-        n_site=41,                       # number of sites
-        periodic=True,                   # periodic boundary conditions
+    hamilton = Exc_Pho_Coupling(
+        n_site=15,                       # number of sites
+        periodic=False,                  # periodic boundary conditions
         homogen=True,                    # Homogeneous chain/ring
         alpha=1e-1,                      # excitonic site energy
         beta=-1e-2,                      # coupling strength (NN)
@@ -27,14 +29,14 @@ def coupled_qcmd(batch_mode):
         omg=1e-3 * 2**(1/2),             # nearest neighbours
         chi=0e-4,                        # exciton-phonon tuning: localized
         rho=0e-4,                        # exciton-phonon tuning: non-symmetric
-        sig=1.8e-4,                      # exciton-phonon tuning: symmetrized
+        sig=10e-4,                       # exciton-phonon tuning: symmetrized
         tau=0e-4                         # exciton-phonon coupling: pair distance
     )
 
     # Set up QCMD solver
     dynamics = QCMD(
         hamilton=hamilton,               # choice of Hamiltonian, see above
-        num_steps=50,                    # number of main time steps
+        num_steps=25,                    # number of main time steps
         step_size=0.01/hamilton.sig[0],  # size of main time steps
         sub_steps=100,                   # number of sub steps
         solver='sm',                     # can be 'lt' or 'sm' or 'pb' (pickaback)
@@ -44,10 +46,8 @@ def coupled_qcmd(batch_mode):
         compare=None                     # How to do the comparison with reference data
     )
 
-    # Set up initial state
-    coeffs = hamilton.n_site * [1.0]     # Excitons completely delocalized
-    noise = 0.1                          # Adding random noise to initial momenta
-    dynamics.fundamental(coeffs, noise)
+    # Set up initial state:  see Georgiev:2019 paper
+    dynamics.gaussian(w_0=0.75)          # Initial "Gaussian" with "width 3"
 
     # Batch mode
     if batch_mode:
