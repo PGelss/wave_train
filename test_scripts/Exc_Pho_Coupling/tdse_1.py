@@ -15,7 +15,7 @@ def coupled_tdse(batch_mode):
         logger = TeeLogger(log_file=my_file + ".log")
 
     # Set up the coupled exciton-phonon Hamiltonian for a chain
-    hamilton = Coupled(
+    hamilton = Exc_Pho_Coupling(
         n_site=15,                       # number of sites
         periodic=False,                  # periodic boundary conditions
         homogen=True,                    # homogeneous chain/ring
