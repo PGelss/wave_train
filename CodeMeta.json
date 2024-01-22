@@ -1,0 +1,95 @@
+{
+    "@context": "https://doi.org/10.5063/schema/codemeta-2.0",
+    "@type": "SoftwareSourceCode",
+    "license": "https://spdx.org/licenses/GPL-3.0+",
+    "codeRepository": "https://github.com/PGelss/wave_train.git",
+    "contIntegration": "https://github.com/PGelss/wave_train/actions",
+    "dateCreated": "2022-01-01",
+    "datePublished": "2022-05-27",
+    "dateModified": "2023-10-02",
+    "downloadUrl": "https://github.com/PGelss/wave_train/archive/refs/tags/v1.0.11.tar.gz",
+    "issueTracker": "https://github.com/PGelss/wave_train/issues",
+    "name": "WaveTrain",
+    "version": "1.0.11",
+    "description": "WaveTrain is an open-source software for numerical simulations of chain-like quantum systems with nearest-neighbor (NN) interactions only (with or without periodic boundary conditions). This Python package is centered around tensor train (TT, or matrix product) representations of quantum-mechanical Hamiltonian operators and (stationary or time-evolving) state vectors. WaveTrain builds on the Python tensor train toolbox scikit_tt, which provides efficient construction methods, storage schemes, as well as solvers for eigenvalue problems and linear differential equations in the TT format.\n\nWaveTrain comprises solvers for time-independent and time-dependent Schrödinger equations employing TT decompositions to construct low-rank representations. Often, the TT ranks of state vectors are found to depend only marginally on the chain length N, which results in the computational effort growing only slightly more than linearly in N, thus mitigating the curse of dimensionality. Thus, WaveTrain complements the existing WavePacket project at SourceForge which does not offer these advantages but which can be used for general Hamiltonians, i.e., without restriction to chain-like systems.\n\nAs a complement to the Python classes for full quantum mechanics, WaveTrain also contains classes for fully classical and mixed quantum-classical (Ehrenfest or mean field) dynamics of bipartite (\"slow-fast\" and/or \"heavy-light\") systems. Moreover, the graphical capabilities allow visualization of quantum dynamics ‘on the fly’, with a choice of several different graphical representations based on reduced density matrices.",
+    "applicationCategory": "Physics",
+    "releaseNotes": "Change log: Time integration now also with Krylov scheme",
+    "funding": "MATH+ (EXC-2046/1, Project ID 390685689)",
+    "developmentStatus": "active",
+    "referencePublication": " https://doi.org/10.1063/5.0147314",
+    "funder": {
+        "@type": "Organization",
+        "name": "Deutsche Forschungsgemeinscaft"
+    },
+    "keywords": [
+        "Quantum Dynamics",
+        "Tensor Trains",
+        "Matrix Product States",
+        "Low Rank Tensor Decomposition"
+    ],
+    "programmingLanguage": [
+        "Python 3"
+    ],
+    "runtimePlatform": [
+        ""
+    ],
+    "operatingSystem": [
+        "Linux",
+        "Windows",
+        "macOS"
+    ],
+    "softwareRequirements": [
+        "NumPy, SciPy, MatPlotLib, https://github.com/PGelss/scikit_tt/"
+    ],
+    "relatedLink": [
+        "https://sourceforge.net/projects/wavetrain.wavepacket.p/"
+    ],
+    "author": [
+        {
+            "@type": "Person",
+            "@id": "https://orcid.org/0000-0003-1361-715X",
+            "givenName": "Jerome",
+            "familyName": "Riedel",
+            "email": "jeror95@zedat.fu-berlin.de",
+            "affiliation": {
+                "@type": "Organization",
+                "name": "Institute of Chemistry,  Freie Universität Berlin, Germany"
+            }
+        },
+        {
+            "@type": "Person",
+            "@id": "https://orcid.org/0000-0002-9658-499X",
+            "givenName": "Patrick",
+            "familyName": "Gelss",
+            "email": "gelss@zib.de",
+            "affiliation": {
+                "@type": "Organization",
+                "name": "Zuse-Institute Berlin, Germany"
+            }
+        },
+        {
+            "@type": "Person",
+            "@id": "https://orcid.org/0000-0002-3645-9513",
+            "givenName": "Burkhard",
+            "familyName": "Schmidt",
+            "email": "burkhard.schmidt@wias-berlin.de",
+            "affiliation": {
+                "@type": "Organization",
+                "name": "Weierstrass-Institute Berlin, Germany"
+            }
+        }
+    ],
+    "contributor": [
+        {
+            "@type": "Person",
+            "@id": "https://orcid.org/0000-0003-0120-1413",
+            "givenName": "Sebastian",
+            "familyName": "Matera",
+            "email": "matera@fhi.mpg.de",
+            "affiliation": {
+                "@type": "Organization",
+                "name": "Fritz-Haber-Institut der MPG, Berlin, Germany"
+            }
+        }
+    ]
+}
