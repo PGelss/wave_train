@@ -35,10 +35,10 @@ def exciton_qe_2(batch_mode):
         hamilton=hamilton,               # choice of Hamiltonian, see above
         num_steps=100,                   # number of main time steps
         step_size=50,                    # size of main time steps
-        sub_steps=10,                    # number of sub steps
+        sub_steps=20,                    # number of sub steps
         solver='k4',                     # can be 's2' (symmetrized Euler) or 'sm' (Strang-Marchuk splitting) or ...
         normalize=0,                     # whether|how to normalize the solution, can be 0|2
-        max_rank=4,                      # max rank of solution
+        max_rank=8,                      # max rank of solution
         repeats=50,                      # number of sweeps (implicit ODE solvers only!)
         threshold=1e-12,                 # threshold in ALS decomposition
         save_file=my_file+'.pic',        # if not None, generated data will be saved to this file
