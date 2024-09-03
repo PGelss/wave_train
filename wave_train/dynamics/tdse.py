@@ -436,9 +436,13 @@ How to compare with reference    : {}
                 elif self.solver == 'vp':  # time-dependent variational principle
                     psi = ode.tdvp(1j*self.operator, initial_value=self.psi, step_size=self.sub_size,
                                                 number_of_steps=self.sub_steps, normalize=self.normalize)
-                elif self.solver in ['k2', 'k4', 'k6', 'k8']:  # Krylov subspace method
+                elif self.solver in ['f2', 'f4', 'f6', 'f8']:  # Krylov subspace method with full orthonormalization
                     for step in range(self.sub_steps):
-                        self.psi = ode.krylov(1j*self.operator, initial_value=self.psi, dimension=int(self.solver[1]), step_size=self.sub_size, threshold=self.threshold,
+                        self.psi = ode.krylov_full(1j*self.operator, initial_value=self.psi, dimension=int(self.solver[1]), step_size=self.sub_size, threshold=self.threshold,
+                                                   max_rank=self.max_rank, normalize=self.normalize)
+                elif self.solver in ['r2', 'r4', 'r6', 'r8']:  # Krylov subspace method with reduced orthonormalization
+                    for step in range(self.sub_steps):
+                        self.psi = ode.krylov_reduced(1j*self.operator, initial_value=self.psi, dimension=int(self.solver[1]), step_size=self.sub_size, threshold=self.threshold,
                                                    max_rank=self.max_rank, normalize=self.normalize)
                 elif self.solver == 'qe':  # Quasi-exact propagation
                     self.psi = self.propagator @ self.psi
@@ -447,7 +451,7 @@ How to compare with reference    : {}
                     sys.exit('Wrong choice of solver')
 
                 # Prepare for next time step
-                if self.solver not in ['qe', 'k2', 'k4', 'k6', 'k8']:
+                if self.solver not in ['qe', 'f2', 'f4', 'f6', 'f8', 'r2', 'r4', 'r6', 'r8']:
                     self.psi = psi[-1]
                     self.psi_guess = self.psi
 
