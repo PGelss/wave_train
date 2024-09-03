@@ -36,7 +36,7 @@ def exciton_qe_2(batch_mode):
         num_steps=100,                   # number of main time steps
         step_size=50,                    # size of main time steps
         sub_steps=20,                    # number of sub steps
-        solver='k4',                     # can be 's2' (symmetrized Euler) or 'sm' (Strang-Marchuk splitting) or ...
+        solver='r4',                     # can be 's2' (symmetrized Euler) or 'sm' (Strang-Marchuk splitting) or ...
         normalize=0,                     # whether|how to normalize the solution, can be 0|2
         max_rank=8,                      # max rank of solution
         repeats=50,                      # number of sweeps (implicit ODE solvers only!)
